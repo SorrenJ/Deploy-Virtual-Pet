@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Permanent+Marker&display=swap');
+
+.shop {
+  display: flex; // Use flexbox for layout
+}
+
+.shopkeeper-container {
+  position: fixed; // Keep the shopkeeper fixed
+  overflow: visible; // Ensure the image is not cut off
+  width: 30%; // Width of the shopkeeper container
+  height: 100vh; // Full height to keep it fixed
+  // background-color: #312438; // Optional: Background color for better visibility
+  // background-image: url("https://www.transparenttextures.com/patterns/old-map.png");
+  padding-top: 44px;
+  padding-right: 15px;
+  text-align: center;
+
+}
+
+.shopkeeper {
+  width: 100%; // Make shopkeeper image full width of container
+  height: auto; // Keep aspect ratio
+  border-radius: 10px; /* Match the padding if you use rounded corners */
+ 
+
+}
+
+
+.moving-clouds {
+  position: absolute;
+  background-image: url('https://res.cloudinary.com/deszclhtq/image/upload/v1728558203/fog-3_ljd6pp.png');
+  background-color: rgba(38, 3, 52, 0.182); /* Dark overlay with transparency */
+  background-blend-mode: multiply; /* Blend the background color with the image */
+  z-index: 1;
+  bottom: 0;
+  left: -50%;
+  -webkit-transform: scale(2);
+  transform: scale(2);
+  margin-top: -800px;
+  width: 550.625em;
+  height: 2000em;
+  -webkit-animation: cloudLoop 100s linear alternate infinite;
+  animation: cloudLoop 100s linear alternate infinite;
+}
+
+@keyframes cloudLoop {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+    opacity: 0;
+  }
+}
+
+
+.shopkeeper-text {
+  position: absolute; // Position text absolutely
+  top: 75px; // Adjust this value to position text vertically
+   // Adjust this value to position text horizontally
+  color: white; // Change text color as needed
+  background-color: rgba(0, 0, 0, 0.5); // Optional: add a semi-transparent background for better readability
+  padding: 5px; // Optional: add padding around the text
+  border-radius: 4px; // Optional: rounded corners
+  z-index: 10; // Ensure it appears above other elements
+  font-family: "Amatic SC", sans-serif;
+  font-size: 45px; // Increase text size (adjust the value as needed)
+  font-weight: bold; // Optional: make the text bold
+  text-align: center;
+}
+
+.items-container {
+  margin-left: 30%; // Leave space for the shopkeeper
+  display: flex;
+  flex-direction: column; // Stack items vertically
+  width: 70%; // Occupy the remaining width
+  padding: 35px; // Optional: add padding for spacing
+}
+
+.money {
+  font-size:2em; // Equivalent to text-3xl in Tailwind
+  font-weight: bold;
+  color: rgb(123, 255, 0);
+  position: relative; // Position relative
+  top: 10px; // Adjust as needed
+  right: 0em; // Adjust as needed
+}
+
+.category-container {
+  margin-bottom: 20px; // Space between categories
+  text-align: center; // Center align the category title
+}
+
+.items-row {
+  display: flex; // Flexbox for horizontal alignment
+  justify-content: center; // Center items horizontally
+  margin: 10px 0; // Margin between rows
+}
+
+.toys-container h1,
+.toiletries-container h1,
+.foods-container h1 {
+  display: flex;
+  justify-content: center; // Center the title
+  margin-bottom: 10px; // Space below the title
+  padding-top: 12px;
+  .button{
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+}
+
+.toys, .toiletries, .foods {
+  border: 2px solid #ccc; // Light gray border
+  border-radius: 8px; // Rounded corners for better appearance
+  padding: 10px; // Padding inside each item
+  margin: 10px; // Margin outside each item
+  width: 150px; // Set a consistent width for each item
+  text-align: center; // Center text within the item box
+  background-color: #f9f9f998; // Light background for better visibility
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Optional: subtle shadow for depth
+  &:hover {
+    box-shadow: 0 4px 8px #4caf4fa9; // Blue shadow on hover
+    transform: scale(1.05); // Slightly expand on hover
+  }
+
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer; // Change cursor to pointer
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 200px; // Increased width to accommodate both description and price
+  background-color: black; // Background color of the tooltip
+  color: #fff; // Text color
+  text-align: center; // Center text
+  border-radius: 5px; // Rounded corners
+  padding: 10px; // Increased padding for more space
+  position: absolute; // Absolute positioning
+  z-index: 1; // Ensure tooltip appears above other elements
+  bottom: 100%; // Position above the element
+  left: 50%; // Center horizontally
+  margin-left: -100px; // Center the tooltip properly (half of the width)
+  opacity: 0; // Start invisible
+  transition: opacity 0.3s; // Fade effect
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible; // Show on hover
+  opacity: 1; // Fade in
+}

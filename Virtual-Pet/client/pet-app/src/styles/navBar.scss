@@ -1,0 +1,42 @@
+nav {
+  padding: 10px;
+  background-color: #4caf4f;
+  color: #fff;
+  position: fixed; // Make the navbar fixed
+  top: 0; // Position it at the top
+  left: 0; // Align it to the left edge
+  right: 0; // Stretch it to the right edge
+  z-index: 1000; // Ensure it appears above other content
+
+  ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+  }
+
+  li {
+    margin-right: 80px;
+  }
+
+  a {
+    color: #fff;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .game-link {
+    background-color: #37a23a;
+    color: #fff;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #1b7c1e;
+    }
+  }
+}

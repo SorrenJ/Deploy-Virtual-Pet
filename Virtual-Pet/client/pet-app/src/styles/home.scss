@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+body {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 1.25em;
+    overflow-x: hidden; /* Disable horizontal scroll */  
+}
+
+
+.light-clouds {
+    position: absolute;
+    background-image: url('https://res.cloudinary.com/deszclhtq/image/upload/v1728558203/fog-3_ljd6pp.png');
+    background-color: rgba(249, 249, 249, 0.486); /* Dark overlay with transparency */
+    // background-blend-mode: multiply; /* Blend the background color with the image */
+    z-index: -1;
+    bottom: 0;
+    left: -50%;
+    -webkit-transform: scale(2);
+    transform: scale(2);
+    margin-top: -800px;
+    width: 550.625em;
+    height: 2000em;
+    -webkit-animation: cloudLoop 100s linear alternate infinite;
+    animation: cloudLoop 100s linear alternate infinite;
+  }
+  
+  @keyframes cloudLoop {
+    0% {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: translate3d(-100%, 0, 0);
+      transform: translate3d(-100%, 0, 0);
+      opacity: 0;
+    }
+  }
+  
+
+.homepage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  padding-top: 50px;
+  width: 100%;
+  overflow-y: hidden; /* Disable horizontal scroll */
+}
+
+.pet-details-container {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin-top: 20px;
+}
+
+/* Left section for inventory */
+.left-section {
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 40%;
+  transform: perspective(500px) rotateX(360deg) rotateY(11deg) skew(356deg, 0deg);
+  transition: transform 0.3s ease-in-out; /* Smooth transition for the hover effect */
+}
+
+
+.left-section:hover {
+    transform: perspective(500px) rotateX(360deg) rotateY(18deg) skew(356deg, 0deg);
+}
+
+/* Inventory Section */
+.inventory-header {
+  font-size: 1.8em;
+}
+
+.inventory-section {
+  display: flex;
+  justify-content: flex-start;
+  gap: 15px;
+}
+
+.inventory-table {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.user-data {
+  width: 100%;
+  margin-top: 20px;
+//   background-color: #f9f9f9;
+//   border-radius: 10px;
+//   padding: 20px;
+//   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // width: 30%;
+}
+
+
+.mid-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+
+}
+
+/* Pet Image and buttons */
+.pet-image {
+
+    width: 500px;
+    height: auto;
+    margin-bottom: 20px;
+    // border: 2px solid #ccc;
+    border-radius: 10px;
+
+}
+
+
+.pet-image-home {
+    width: 1000px;
+    height: 100%;
+    margin-bottom: 20px;
+    // border: 2px solid #ccc;
+    border-radius: 10px;
+    position:relative;
+}
+
+
+.buttons-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  align-items: center;
+}
+
+
+/* Table and button styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  padding: 15px;
+  text-align: center;
+  font-size: 1.1em;
+  border-bottom: 1px solid #ddd;
+}
+
+table th {
+  background-color: #4CAF50;
+  color: white;
+  font-weight: bold;
+}
+
+// table tr:hover {
+//   background-color: #f1f1f1;
+// }
+
+table img {
+  border-radius: 10px;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button{
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+.action-button{
+    margin: 10px;
+
+}
+
+.right-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 30%;
+    padding-left: 20px;
+    margin-top:-15%;
+    font-size:1.25em;
+    // border-left: 2px solid #ccc;
+    transform: perspective(500px) rotateX(9deg) rotateY(342deg) skew(2deg, 0deg);
+    transition: transform 0.3s ease-in-out; /* Smooth transition for the hover effect */
+
+}
+
+
+.right-section:hover {
+    transform: perspective(500px) rotateX(9deg) rotateY(330deg) skew(2deg, 0deg); /* Slight tilt to the right on hover */
+  }
+
+.inventory-section {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    
+  
+}
+
+.inventory-table {
+    margin-top: 20px;
+    width: 80%;
+    
+}
+
+#petSelector{
+    background-color:#4caf50;
+    font-size: 1.5em;
+    border-radius: 5px;
+    color:white;
+    padding: 10px 55px;
+
+}
+
+.input-section {
+    padding: 10px 15px;
+    
+  
+  }
+  
+
+input{
+    padding: 10px 15px;
+    
+}
+

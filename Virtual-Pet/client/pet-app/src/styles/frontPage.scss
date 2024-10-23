@@ -1,0 +1,110 @@
+
+
+
+.welcome-font{
+font-size:2em;
+margin-top: 25px;
+}
+
+.moving-image-container {
+  position: relative;
+  overflow: hidden; /* Hide overflow */
+  width: 100vw; /* Full width of the viewport */
+  height: 50vh; /* Adjust height as needed */
+}
+
+.moving-image {
+  position: absolute;
+  width: auto; /* Set the width to auto to maintain aspect ratio */
+  height: auto; /* Maintain aspect ratio */
+  margin: 0 20px; /* Add horizontal margin to space out images */
+  animation: moveImage 8s linear infinite; /* Adjust duration for speed */
+}
+
+@keyframes moveLeft {
+  0% {
+    left: 100%; /* Start off the screen to the right */
+  }
+  100% {
+    left: -100%; /* Move to the left off the screen */
+  }
+}
+
+/* Keyframes for moving right */
+@keyframes moveRight {
+  0% {
+    left: -100%; /* Start off the screen to the left */
+  }
+  100% {
+    left: 100%; /* Move to the right off the screen */
+  }
+}
+
+/* Animation for specific images can be added here */
+.red-moving{
+ animation: moveRight 10s linear infinite; /* Move right at a speed of 6s */
+
+}
+
+.yellow-moving {
+  animation: moveLeft 10s linear infinite; /* Delay for yellow moving image */
+}
+
+.orange-moving {
+  animation: moveRight 6s linear infinite; /* Move right at a speed of 6s */
+} 
+
+
+.blue-moving {
+  animation-delay: 3s; /* Delay for blue moving image */
+}
+
+.green-moving {
+  animation-delay: 4s; /* Delay for green moving image */
+}
+
+.pink-image {
+  padding-top: 10px;
+  animation: moveLeft 17s linear infinite; /* Move left at a speed of 7s */
+}
+
+/* Optional styles for the beastly-bond-logo */
+.beastly-bond-logo {
+  width: 800px; /* Adjust the logo size */
+  display: block;
+  margin: 0 auto; /* Center the logo horizontally */
+  padding-bottom: 20px; /* Add some spacing between the logo and moving image */
+}
+
+.logo {
+  text-align: center;
+  margin-top: 0;
+  padding-top: 0;
+
+}
+
+.button-container {
+  margin-top: 20px; /* Add spacing above the buttons */
+  text-align: center; /* Center the buttons */
+}
+
+.adopt-button,
+.home-button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  position: relative;
+  top: 25px; /* Add vertical space */
+  cursor: pointer;
+  margin: 0 10px; /* Add space between the buttons */
+  
+  &:hover {
+    background-color: #218838; /* Darken the button on hover */
+  }
+}
+
+  
+
+
