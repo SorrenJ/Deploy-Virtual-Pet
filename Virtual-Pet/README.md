@@ -1,8 +1,8 @@
 # Virtual-Pet
 
-We know... we'll delete the .env file later
 
 ## Setup
+Create a new .env in root directory. Copy over content from .env.example
 Install dependencies with `npm install` in each respective `/client/pet-app` and `/server`.
 
 ## How To Run
