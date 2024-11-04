@@ -10,32 +10,12 @@ const app = express();
 
 // Middleware
 
-// Define allowed origins
-const allowedOrigins = [
-    'http://localhost:3000', // Local development
-    'https://virtual-pet-frontend-y0c7.onrender.com' // Deployed frontend on Render
-  ];
-  
-  // Enable CORS with dynamic origin checking
-  app.use(cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps or curl requests)
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    }
-  }));
-  
-  // Other Middleware
-  app.use(bodyParser.json());
-  app.use(express.json());
-  
-  // Your Routes
-  // (keep the rest of your routes as they are)
+// Enable CORS to allow requests from localhost:3000 (your React frontend)
+app.use(cors()); // Temporarily allow all origins for testing
 
+// Parse incoming JSON requests
+app.use(bodyParser.json());
+app.use(express.json());
 
 // Serve static files from the "db" directory (if needed)
 app.use('/db', express.static('db'));

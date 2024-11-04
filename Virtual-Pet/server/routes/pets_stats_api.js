@@ -4,7 +4,9 @@ const pool = require('../db/db'); // Import the pool from db/db.js
 
 // Function to decrement pet stats
 const decrementPetStats = async () => {
+    console.time('decrementPetStats'); // Start timer
     try {
+        // console.time('decrementPetStats'); // Start timer
         const query = `
         SELECT p.id AS pet_id, p.energy, p.happiness, p.hunger, p.cleanliness, 
                per.energy_decay, per.happiness_decay, per.hunger_decay, per.cleanliness_decay
