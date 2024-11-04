@@ -15,7 +15,7 @@ const CleanPetPage= () => {
     // Fetch data for pets and user toiletry
     const fetchData = async () => {
         try {
-            const response = await fetch(`/api/home?selectedPetId=${selectedPet?selectedPet.pet_id:1}`);
+            const response = await fetch(`http://localhost:5000/api/home?selectedPetId=${selectedPet?selectedPet.pet_id:1}`);
             const data = await response.json();
 
             setPets(data.pets || []);
@@ -37,7 +37,7 @@ const CleanPetPage= () => {
                 throw new Error('Missing petId or toiletriesId');
             }
 
-            const response = await fetch('/api/clean-pet', {
+            const response = await fetch('http://localhost:5000/api/clean-pet', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

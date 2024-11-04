@@ -14,7 +14,7 @@ const PlayPetPage = () => {
     // Fetch data for pets and user food
     const fetchData = async () => {
         try {
-            const response = await fetch(`/api/home?selectedPetId=${selectedPet?selectedPet.pet_id:1}`);
+            const response = await fetch(`http://localhost:5000/api/home?selectedPetId=${selectedPet?selectedPet.pet_id:1}`);
             const data = await response.json();
 
             setPets(data.pets || []);
@@ -36,7 +36,7 @@ const PlayPetPage = () => {
                 throw new Error('Missing petId or toyId');
             }
 
-            const response = await fetch('/api/play-with-pet', {
+            const response = await fetch('http://localhost:5000/api/play-with-pet', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
