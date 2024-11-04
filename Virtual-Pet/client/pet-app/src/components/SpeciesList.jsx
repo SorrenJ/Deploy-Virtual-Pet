@@ -16,7 +16,7 @@ const SpeciesList = ({ speciesList, adoptPet }) => {
 
   useEffect(() => {
     if (selectedSpecies && selectedColor) {
-      fetch(`/api/species/sprite?species_id=${selectedSpecies.id}&color_id=${selectedColor}`)
+      fetch(`https://virtual-pet-backend-3nat.onrender.com/api/species/sprite?species_id=${selectedSpecies.id}&color_id=${selectedColor}`)
         .then((response) => response.json())
         .then((data) => {
           if (data.spriteUrl) {

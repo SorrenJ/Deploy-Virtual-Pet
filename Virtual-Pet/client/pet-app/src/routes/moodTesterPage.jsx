@@ -86,7 +86,7 @@ const checkForDeath = async (petId, stats) => {
 
     const fetchPetStats = async (petId, excludeMoodId4 = false) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/pets-stats/${petId}`);
+            const response = await fetch(`https://virtual-pet-backend-3nat.onrender.com/api/pets-stats/${petId}`);
             const data = await response.json();
             setPetStats(data);
             console.log("Pet stats updated for petId:", petId);

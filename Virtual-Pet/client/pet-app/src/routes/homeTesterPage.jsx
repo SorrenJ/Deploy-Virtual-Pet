@@ -39,7 +39,7 @@ const HomeTesterPage = () => {
         console.log('Fetching new data...'); // Log when the fetch starts
 
         try {
-            const response = await fetch(`http://localhost:5000/api/home`);
+            const response = await fetch(`https://virtual-pet-backend-3nat.onrender.com/api/home`);
             const data = await response.json();
             console.log('Data received:', data); // Log the received data
             setPets(data.pets || []);

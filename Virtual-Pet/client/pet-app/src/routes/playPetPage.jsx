@@ -36,7 +36,7 @@ const PlayPetPage = () => {
                 throw new Error('Missing petId or toyId');
             }
 
-            const response = await fetch('http://localhost:5000/api/play-with-pet', {
+            const response = await fetch('https://virtual-pet-backend-3nat.onrender.com/api/play-with-pet', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

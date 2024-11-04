@@ -15,8 +15,8 @@ function AdoptPage() {
     const fetchData = async () => {
       try {
 
-        const speciesResponse = await fetch('http://localhost:5000/api/species'); 
-        const petsResponse = await fetch('http://localhost:5000/api/pets'); 
+        const speciesResponse = await fetch('https://virtual-pet-backend-3nat.onrender.com/api/species'); 
+        const petsResponse = await fetch('https://virtual-pet-backend-3nat.onrender.com/api/pets'); 
       
         // const speciesResponse = await fetch('/api/species', {
         //   headers: { 'Cache-Control': 'no-cache' }
@@ -47,7 +47,7 @@ console.log("species:", species);
 
   const adoptPet = async (speciesId, petName, colorId) => {
     try {
-      const response = await fetch('http://localhost:5000/api/adopt-pet', {
+      const response = await fetch('https://virtual-pet-backend-3nat.onrender.com/api/adopt-pet', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ console.log("species:", species);
       if (response.ok) {
         const adoptedPet = await response.json();
         
-        const nameResponse = await fetch('http://localhost:5000/api/set-pet-name', {
+        const nameResponse = await fetch('https://virtual-pet-backend-3nat.onrender.com/api/set-pet-name', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

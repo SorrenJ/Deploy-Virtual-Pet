@@ -14,7 +14,7 @@ const FeedPetPage = () => {
     // Fetch data for pets and user food
     const fetchData = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/api/home?selectedPetId=${selectedPet?selectedPet.pet_id:1}`);
+            const response = await fetch(`https://virtual-pet-backend-3nat.onrender.com/api/home?selectedPetId=${selectedPet?selectedPet.pet_id:1}`);
             const data = await response.json();
 
             setPets(data.pets || []);
@@ -36,7 +36,7 @@ const FeedPetPage = () => {
                 throw new Error('Missing petId or foodId');
             }
 
-            const response = await fetch('http://localhost:5000/api/feed-pet', {
+            const response = await fetch('https://virtual-pet-backend-3nat.onrender.com/api/feed-pet', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

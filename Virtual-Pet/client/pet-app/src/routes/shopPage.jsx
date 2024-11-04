@@ -55,7 +55,7 @@ const ShopPage = () => {
     const userId = 1; // Replace with actual user ID from your context or state
 
     try {
-      const response = await fetch('http://localhost:5000/add-money', {
+      const response = await fetch('https://virtual-pet-backend-3nat.onrender.com/add-money', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

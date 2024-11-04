@@ -10,8 +10,22 @@ const app = express();
 
 // Middleware
 
-// Enable CORS to allow requests from localhost:3000 (your React frontend)
-app.use(cors()); // Temporarily allow all origins for testing
+const cors = require("cors");
+
+const allowedOrigins = [
+  'http://localhost:3000', // Local development
+  'https://virtual-pet-frontend-y0c7.onrender.com/' // Deployed frontend
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
 
 // Parse incoming JSON requests
 app.use(bodyParser.json());
