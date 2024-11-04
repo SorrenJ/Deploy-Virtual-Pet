@@ -18,7 +18,7 @@ const InventoryModal = ({ isOpen, onRequestClose }) => {
 
     const fetchGeneralData = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/api/inventory`);
+            const response = await fetch(`https://virtual-pet-backend-3nat.onrender.com/api/inventory`);
             const data = await response.json();
             setPets(data.pets || []);
             setUserFood(data.userFood.filter(item => item.count > 0) || []);
