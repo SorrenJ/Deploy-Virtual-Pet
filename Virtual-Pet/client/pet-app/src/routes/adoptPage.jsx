@@ -23,7 +23,10 @@ function AdoptPage() {
         
         
         const species = await speciesResponse.json();
+console.log("species:", species);
+
         const pets = await petsResponse.json();
+        console.log("pets:", pets);
   
         setSpeciesList(species);
         setPetsList(pets);
