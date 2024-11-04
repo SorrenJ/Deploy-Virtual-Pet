@@ -47,7 +47,7 @@ console.log("species:", species);
 
   const adoptPet = async (speciesId, petName, colorId) => {
     try {
-      const response = await fetch('/adopt-pet', {
+      const response = await fetch('http://localhost:5000/api/adopt-pet', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ console.log("species:", species);
       if (response.ok) {
         const adoptedPet = await response.json();
         
-        const nameResponse = await fetch('/set-pet-name', {
+        const nameResponse = await fetch('http://localhost:5000/api/set-pet-name', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
