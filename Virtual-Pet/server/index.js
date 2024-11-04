@@ -105,7 +105,7 @@ app.get('/adopt', async (req, res) => {
 
 
 
-app.post('/api/adopt-pet', async (req, res) => {
+app.post('/adopt-pet', async (req, res) => {
     const { species_id, color_id } = req.body;  // Get species_id and color_id from the request
     const userId = 1;  // Hardcoded user ID for now
 
