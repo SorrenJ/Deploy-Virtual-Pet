@@ -12,7 +12,7 @@ const ShopPage = () => {
 
   useEffect(() => {
     // Fetch data from your backend API
-    fetch('http://localhost:5000/shop') 
+    fetch('https://virtual-pet-backend-3nat.onrender.com/shop') 
       .then(response => response.json())
       .then(fetchedData => {
         // Ensure money is treated as a number
@@ -27,7 +27,7 @@ const ShopPage = () => {
     const userId = 1; // Replace with actual user ID from your context or state
 
     try {
-      const response = await fetch('http://localhost:5000/buy', {
+      const response = await fetch('https://virtual-pet-backend-3nat.onrender.com/buy', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

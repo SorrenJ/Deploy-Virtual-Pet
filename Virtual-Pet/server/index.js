@@ -74,7 +74,7 @@ app.listen(PORT, () => {
 
 
 // Adoption route
-app.get('/adopt', async (req, res) => {
+app.get('/api/adopt', async (req, res) => {
     try {
         // Query the species table
         const speciesResult = await pool.query(`
@@ -105,7 +105,7 @@ app.get('/adopt', async (req, res) => {
 
 
 
-app.post('/adopt-pet', async (req, res) => {
+app.post('/api/adopt-pet', async (req, res) => {
     const { species_id, color_id } = req.body;  // Get species_id and color_id from the request
     const userId = 1;  // Hardcoded user ID for now
 
@@ -160,7 +160,7 @@ app.post('/adopt-pet', async (req, res) => {
 
 
 
-app.post('/set-pet-name', async (req, res) => {
+app.post('/api/set-pet-name', async (req, res) => {
     const { pet_id, name } = req.body;
 
     try {
