@@ -74,7 +74,7 @@ app.listen(PORT, () => {
 
 
 // Adoption route
-app.get('/api/adopt', async (req, res) => {
+app.get('/adopt', async (req, res) => {
     try {
         // Query the species table
         const speciesResult = await pool.query(`
@@ -160,7 +160,7 @@ app.post('/api/adopt-pet', async (req, res) => {
 
 
 
-app.post('/api/set-pet-name', async (req, res) => {
+app.post('/set-pet-name', async (req, res) => {
     const { pet_id, name } = req.body;
 
     try {
