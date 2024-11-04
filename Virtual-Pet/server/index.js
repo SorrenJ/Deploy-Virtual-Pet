@@ -10,8 +10,6 @@ const app = express();
 
 // Middleware
 
-const cors = require("cors");
-
 const allowedOrigins = [
   'http://localhost:3000', // Local development
   'https://virtual-pet-frontend-y0c7.onrender.com/' // Deployed frontend
