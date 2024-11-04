@@ -14,8 +14,13 @@ function AdoptPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const speciesResponse = await fetch('/api/species');
-        const petsResponse = await fetch('/api/pets');
+        const speciesResponse = await fetch('/api/species', {
+          headers: { 'Cache-Control': 'no-cache' }
+        });
+        const petsResponse = await fetch('/api/pets', {
+          headers: { 'Cache-Control': 'no-cache' }
+        });
+        
         
         const species = await speciesResponse.json();
         const pets = await petsResponse.json();
