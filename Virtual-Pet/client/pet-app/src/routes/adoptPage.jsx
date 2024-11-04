@@ -14,12 +14,16 @@ function AdoptPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const speciesResponse = await fetch('/api/species', {
-          headers: { 'Cache-Control': 'no-cache' }
-        });
-        const petsResponse = await fetch('/api/pets', {
-          headers: { 'Cache-Control': 'no-cache' }
-        });
+
+        const speciesResponse = await fetch('http://localhost:5000/api/species'); 
+        const petsResponse = await fetch('http://localhost:5000/api/pets'); 
+      
+        // const speciesResponse = await fetch('/api/species', {
+        //   headers: { 'Cache-Control': 'no-cache' }
+        // });
+        // const petsResponse = await fetch('/api/pets', {
+        //   headers: { 'Cache-Control': 'no-cache' }
+        // });
         
         
         const species = await speciesResponse.json();
