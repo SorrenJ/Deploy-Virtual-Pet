@@ -219,189 +219,178 @@ app.post('/api/adopt-pet', async (req, res) => {
 
 
 
-
 app.post('/api/set-pet-name', async (req, res) => {
     const { pet_id, name } = req.body;
-
+  
     try {
-        // Update the pet's name based on the pet_id
-        const updatedPetResult = await pool.query(`
-            UPDATE pets
-            SET 
-                name = $1,
-                update_time = CURRENT_TIMESTAMP
-            WHERE id = $2
-            RETURNING *
-        `, [name, pet_id]);
-
-        if (updatedPetResult.rowCount === 0) {
-            return res.status(404).send('No pet found to update.');
-        }
-
-        res.status(200).json(updatedPetResult.rows[0]);
+      const db = await connectToMongoDatabase();
+  
+      // Update the pet's name based on pet_id
+      const result = await db.collection('pets').findOneAndUpdate(
+        { _id: pet_id },
+        { $set: { name, update_time: new Date() } },
+        { returnDocument: 'after' } // Return the updated document
+      );
+  
+      if (!result.value) {
+        return res.status(404).json({ error: 'No pet found to update.' });
+      }
+  
+      res.status(200).json(result.value);
     } catch (err) {
-        console.error('Error setting pet name:', err);
-        res.status(500).send('Server error');
+      console.error('Error setting pet name:', err);
+      res.status(500).json({ error: 'Server error' });
     }
-});
-app.get('/shop', async (req, res) => {
+  });
+  
+  app.get('/shop', async (req, res) => {
     try {
-        const toysResult = await pool.query('SELECT * FROM toys');
-        const toys = toysResult.rows;
-
-        const toiletriesResult = await pool.query('SELECT * FROM toiletries');
-        const toiletries = toiletriesResult.rows;
-
-        const foodsResult = await pool.query('SELECT * FROM foods');
-        const foods = foodsResult.rows;
-
-        const moneyResult = await pool.query('SELECT money FROM inventory WHERE user_id = $1', [1]); // Replace 1 with actual user ID if available
-        const money = moneyResult.rows[0] ? moneyResult.rows[0].money : 0; // Fallback to 0 if no money found
-
-        // Send data as JSON response
-        res.json({ toys, toiletries, foods, money });
+      const db = await connectToMongoDatabase();
+  
+      // Fetch all toys, toiletries, foods, and user's money
+      const toys = await db.collection('toys').find().toArray();
+      const toiletries = await db.collection('toiletries').find().toArray();
+      const foods = await db.collection('foods').find().toArray();
+      const inventory = await db.collection('inventory').findOne({ user_id: 1 }); // Replace 1 with actual user ID
+  
+      const money = inventory?.money || 0;
+  
+      res.json({ toys, toiletries, foods, money });
     } catch (err) {
-        console.error('Error fetching data:', err);
-        res.status(500).json({ error: 'Server error' });
+      console.error('Error fetching shop data:', err);
+      res.status(500).json({ error: 'Server error' });
     }
-});
-
+  });
+  
 // Buy route
 app.post('/buy', async (req, res) => {
-  const { userId, itemId, itemType, itemCount } = req.body;
-
-  try {
+    const { userId, itemId, itemType, itemCount } = req.body;
+  
+    try {
+      const db = await connectToMongoDatabase();
+  
       // Get item price based on item type
-      const itemResult = await pool.query('SELECT price FROM ' + itemType + ' WHERE id = $1', [itemId]);
-      const item = itemResult.rows[0];
-
+      const item = await db.collection(itemType).findOne({ _id: itemId });
+  
       if (!item) {
-          return res.status(404).json({ error: 'Item not found' });
+        return res.status(404).json({ error: 'Item not found' });
       }
-
+  
       const totalCost = item.price * itemCount;
-
-      // Update the user's money in the inventory
-      const moneyResult = await pool.query('SELECT money FROM inventory WHERE user_id = $1', [userId]);
-
-      // Check if the moneyResult has any rows
-      if (moneyResult.rows.length === 0) {
-          return res.status(404).json({ error: 'User inventory not found' });
+  
+      // Fetch user's current money
+      const inventory = await db.collection('inventory').findOne({ user_id: userId });
+  
+      if (!inventory || inventory.money < totalCost) {
+        return res.status(400).json({ error: 'Not enough money' });
       }
-
-      const currentMoney = moneyResult.rows[0].money;
-
-      if (currentMoney < totalCost) {
-          return res.status(400).json({ error: 'Not enough money' });
-      }
-
-      // Deduct money from the inventory
-      await pool.query('UPDATE inventory SET money = money - $1 WHERE user_id = $2', [totalCost, userId]);
-
-      // Check if the item already exists in the user-specific table
-      const userItemResult = await pool.query(`
-          SELECT * FROM user_${itemType} 
-          WHERE user_id = $1 AND item_type_id = $2
-      `, [userId, itemId]);
-
-      if (userItemResult.rows.length > 0) {
-          // If it exists, update the count
-          await pool.query(`
-              UPDATE user_${itemType} 
-              SET count = count + $1 
-              WHERE user_id = $2 AND item_type_id = $3
-          `, [itemCount, userId, itemId]);
+  
+      // Deduct money from inventory
+      await db.collection('inventory').updateOne(
+        { user_id: userId },
+        { $inc: { money: -totalCost } }
+      );
+  
+      // Check if the item already exists in the user's collection
+      const userItemCollection = `user_${itemType}`;
+      const userItem = await db.collection(userItemCollection).findOne({
+        user_id: userId,
+        item_type_id: itemId,
+      });
+  
+      if (userItem) {
+        // Update item count if it exists
+        await db.collection(userItemCollection).updateOne(
+          { user_id: userId, item_type_id: itemId },
+          { $inc: { count: itemCount } }
+        );
       } else {
-          // If it doesn't exist, insert a new row
-          await pool.query(`
-              INSERT INTO user_${itemType} (count, user_id, inventory_id, item_type_id) 
-              VALUES ($1, $2, (SELECT id FROM inventory WHERE user_id = $2), $3)
-          `, [itemCount, userId, itemId]);
+        // Insert new item if it doesn't exist
+        await db.collection(userItemCollection).insertOne({
+          count: itemCount,
+          user_id: userId,
+          inventory_id: inventory._id,
+          item_type_id: itemId,
+          created_at: new Date(),
+        });
       }
-
-      res.status(200).json({message: 'No refunds!'});
-  } catch (err) {
+  
+      res.status(200).json({ message: 'No refunds!' });
+    } catch (err) {
       console.error('Error purchasing item:', err);
       res.status(500).json({ error: 'Server error' });
-  }
-});
+    }
+  });
+  
 
 // Temporary add money route
 app.post('/add-money', async (req, res) => {
-  const { userId, amount } = req.body;
-
-
-  try {
-      // Update the user's money in the inventory
-      await pool.query('UPDATE inventory SET money = money + $1 WHERE user_id = $2', [amount, userId]);
-      
+    const { userId, amount } = req.body;
+  
+    try {
+      const db = await connectToMongoDatabase();
+  
+      // Update user's money in the inventory
+      const result = await db.collection('inventory').updateOne(
+        { user_id: userId },
+        { $inc: { money: amount } }
+      );
+  
+      if (result.modifiedCount === 0) {
+        return res.status(404).json({ error: 'User inventory not found' });
+      }
+  
       res.status(200).json({ message: `$${amount} added to your balance` });
-  } catch (err) {
+    } catch (err) {
       console.error('Error adding money:', err);
       res.status(500).json({ error: 'Server error' });
-  }
-});
+    }
+  });
+  
 
-// Route to get all data from all tables
 // Route to get all data from all tables
 app.get('/all_tables', async (req, res) => {
     try {
-      // Queries for all tables
-      const speciesQuery = 'SELECT * FROM species';
-      const usersQuery = 'SELECT * FROM users';
-      const petsQuery = 'SELECT * FROM pets';
-      const moodsQuery = 'SELECT * FROM moods';
-      const spritesQuery = 'SELECT * FROM sprites';  // Added sprites query
-      const colorsQuery = 'SELECT * FROM colors';
-      const personalitiesQuery = 'SELECT * FROM personalities';  // Added personalities query
+      const db = await connectToMongoDatabase();
   
-      const inventoryQuery = 'SELECT * FROM inventory';
-      const userFoodQuery = 'SELECT * FROM user_foods';
-      const userToiletriesQuery = 'SELECT * FROM user_toiletries';
-      const userToysQuery = 'SELECT * FROM user_toys';
-      const shopQuery = 'SELECT * FROM shop';
-      const toysQuery = 'SELECT * FROM toys';
-      const toiletriesQuery = 'SELECT * FROM toiletries';
-      const foodsQuery = 'SELECT * FROM foods';
+      // Fetch all data from collections
+      const species = await db.collection('species').find().toArray();
+      const users = await db.collection('users').find().toArray();
+      const pets = await db.collection('pets').find().toArray();
+      const moods = await db.collection('moods').find().toArray();
+      const sprites = await db.collection('sprites').find().toArray(); // Fetch sprites data
+      const colors = await db.collection('colors').find().toArray();
+      const personalities = await db.collection('personalities').find().toArray(); // Fetch personalities data
   
-      // Execute all queries
-      const species = await pool.query(speciesQuery);
-      const users = await pool.query(usersQuery);
-      const pets = await pool.query(petsQuery);
-      const moods = await pool.query(moodsQuery);
-      const sprites = await pool.query(spritesQuery);  // Fetch sprites data
-      const colors = await pool.query(colorsQuery);
-      const personalities = await pool.query(personalitiesQuery);  // Fetch personalities data
-  
-      const inventory = await pool.query(inventoryQuery);
-      const userFood = await pool.query(userFoodQuery);
-      const userToiletries = await pool.query(userToiletriesQuery);
-      const userToys = await pool.query(userToysQuery);
-      const shop = await pool.query(shopQuery);
-      const toys = await pool.query(toysQuery);
-      const toiletries = await pool.query(toiletriesQuery);
-      const foods = await pool.query(foodsQuery);
+      const inventory = await db.collection('inventory').find().toArray();
+      const userFood = await db.collection('user_foods').find().toArray();
+      const userToiletries = await db.collection('user_toiletries').find().toArray();
+      const userToys = await db.collection('user_toys').find().toArray();
+      const shop = await db.collection('shop').find().toArray();
+      const toys = await db.collection('toys').find().toArray();
+      const toiletries = await db.collection('toiletries').find().toArray();
+      const foods = await db.collection('foods').find().toArray();
   
       // Render the EJS template and pass all the data to the template
       res.render('all_tables', {
-        species: species.rows,
-        users: users.rows,
-        pets: pets.rows,
-        moods: moods.rows,
-        sprites: sprites.rows,  // Pass sprites data to the view
-        colors: colors.rows,
-        personalities: personalities.rows,  // Pass personalities data to the view
-        inventory: inventory.rows,
-        userFood: userFood.rows,
-        userToiletries: userToiletries.rows,
-        userToys: userToys.rows,
-        shop: shop.rows,
-        toys: toys.rows,
-        toiletries: toiletries.rows,
-        foods: foods.rows
+        species,
+        users,
+        pets,
+        moods,
+        sprites, // Pass sprites data to the view
+        colors,
+        personalities, // Pass personalities data to the view
+        inventory,
+        userFood,
+        userToiletries,
+        userToys,
+        shop,
+        toys,
+        toiletries,
+        foods,
       });
     } catch (error) {
-      console.error('Error executing query', error.stack);
+      console.error('Error fetching data:', error);
       res.status(500).send('Internal Server Error');
     }
   });

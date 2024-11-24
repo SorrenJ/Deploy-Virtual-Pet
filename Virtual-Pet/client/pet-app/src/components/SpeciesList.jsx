@@ -16,7 +16,7 @@ const SpeciesList = ({ speciesList, adoptPet }) => {
 
   useEffect(() => {
     if (selectedSpecies && selectedColor) {
-      fetch(`https://virtual-pet-backend-3nat.onrender.com/api/species/sprite?species_id=${selectedSpecies.id}&color_id=${selectedColor}`)
+      fetch(`/api/species/sprite?species_id=${selectedSpecies.id}&color_id=${selectedColor}`)
         .then((response) => response.json())
         .then((data) => {
           if (data.spriteUrl) {
@@ -30,14 +30,16 @@ const SpeciesList = ({ speciesList, adoptPet }) => {
   return (
     <div className="species-container">
       <div className="species-list">
-        <ul>
-          {speciesList.map((species) => (
-            <li key={species.id} onClick={() => handleImageClick(species)} className="species-item">
-              <img src={species.image} alt={species.species_name} />
-              <span className="tooltip">{species.species_name}</span>
-            </li>
-          ))}
-        </ul>
+      {speciesList.map((species, index) => (
+    <li 
+      key={species.id || index} 
+      onClick={() => handleImageClick(species)} 
+      className="species-item"
+    >
+      <img src={species.image} alt={species.species_name} />
+      <span className="tooltip">{species.species_name}</span>
+    </li>
+  ))}
       </div>
 
       <div className="species-details">

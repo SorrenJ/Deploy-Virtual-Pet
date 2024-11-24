@@ -1,70 +1,104 @@
 const express = require("express");
 const router = express.Router();
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const pool = require('../db/db'); // Import the pool from db/db.js
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const connectToMongoDatabase = require("../db/mongoConnection"); // MongoDB connection utility
+
 router.use(bodyParser.json());
 router.use(cors());
 
 // Route to fetch all pets by user ID
-router.get('/:userId', async (req, res) => {
+router.get("/:userId", async (req, res) => {
   const { userId } = req.params;
 
-  // Validate userId and check if it's defined and a number
-  if (!userId || isNaN(userId)) {
-    return res.status(400).json({ error: 'Invalid or missing user ID' });
+  // Validate userId
+  if (!userId) {
+    return res.status(400).json({ error: "Invalid or missing user ID" });
   }
 
   try {
-    const petsQuery = await pool.query(
-      `SELECT pets.id, pets.name, sprites.image_url AS pet_image_url, colors.color_name, pets.mood_id
-       FROM pets 
-       JOIN sprites ON pets.sprite_id = sprites.id
-       JOIN colors ON pets.color_id = colors.id
-       WHERE pets.user_id = $1`,
-      [userId]
-    );
+    const db = await connectToMongoDatabase();
 
-    if (petsQuery.rows.length === 0) {
-      return res.status(404).json({ error: 'No pets found for this user' });
+    // Fetch pets for the given userId
+    const pets = await db
+      .collection("pets")
+      .aggregate([
+        { $match: { user_id: parseInt(userId) } },
+        {
+          $lookup: {
+            from: "sprites",
+            localField: "sprite_id",
+            foreignField: "_id",
+            as: "sprite_info",
+          },
+        },
+        {
+          $lookup: {
+            from: "colors",
+            localField: "color_id",
+            foreignField: "_id",
+            as: "color_info",
+          },
+        },
+        {
+          $project: {
+            id: 1,
+            name: 1,
+            pet_image_url: { $arrayElemAt: ["$sprite_info.image_url", 0] },
+            color_name: { $arrayElemAt: ["$color_info.color_name", 0] },
+            mood_id: 1,
+          },
+        },
+      ])
+      .toArray();
+
+    if (pets.length === 0) {
+      return res.status(404).json({ error: "No pets found for this user" });
     }
 
-    res.json(petsQuery.rows);
+    res.json(pets);
   } catch (error) {
-    console.error('Error fetching pets:', error);
-    res.status(500).json({ error: 'Server error' });
+    console.error("Error fetching pets:", error);
+    res.status(500).json({ error: "Server error" });
   }
 });
 
-
-
 // Route to update a specific pet's image based on mood
-router.put('/update-image/:userId/:petId', async (req, res) => {
+router.put("/update-image/:userId/:petId", async (req, res) => {
   const { userId, petId } = req.params;
   const { mood_id } = req.body;
 
   try {
-    // Update mood_id and sprite_id
-    await pool.query(
-      'UPDATE pets SET mood_id = $1, sprite_id = (SELECT id FROM sprites WHERE species_id = pets.species_id AND color_id = pets.color_id AND mood_id = $1) WHERE id = $2 AND user_id = $3',
-      [mood_id, petId, userId]
+    const db = await connectToMongoDatabase();
+
+    // Find the new sprite_id based on mood and color
+    const pet = await db.collection("pets").findOne({ _id: parseInt(petId), user_id: parseInt(userId) });
+    if (!pet) {
+      return res.status(404).json({ error: "Pet not found" });
+    }
+
+    const newSprite = await db.collection("sprites").findOne({
+      species_id: pet.species_id,
+      color_id: pet.color_id,
+      mood_id: mood_id,
+    });
+
+    if (!newSprite) {
+      return res.status(404).json({ error: "Matching sprite not found for the mood" });
+    }
+
+    // Update the pet's mood_id and sprite_id
+    await db.collection("pets").updateOne(
+      { _id: parseInt(petId), user_id: parseInt(userId) },
+      { $set: { mood_id: mood_id, sprite_id: newSprite._id } }
     );
 
-    // Fetch the updated pet to return the new image URL
-    const updatedPet = await pool.query(
-      `SELECT sprites.image_url AS pet_image_url 
-       FROM pets 
-       JOIN sprites ON pets.sprite_id = sprites.id 
-       WHERE pets.id = $1`,
-      [petId]
-    );
-
-    res.json(updatedPet.rows[0]);  // Return the updated pet with the new image URL
+    // Return the updated pet's image URL
+    res.json({ pet_image_url: newSprite.image_url });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to update pet mood and sprite' });
+    console.error("Error updating pet mood and sprite:", error);
+    res.status(500).json({ error: "Failed to update pet mood and sprite" });
   }
 });
-
 
 module.exports = router;

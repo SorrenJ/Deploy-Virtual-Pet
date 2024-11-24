@@ -1,21 +1,25 @@
-// Route to delete a pet
 const express = require("express");
 const router = express.Router();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const pool = require('../db/db'); // Import the pool from db/db.js
+const db = require('../db/mongoConnection'); // Import the MongoDB connection
+
 router.use(bodyParser.json());
-router.use(cors());
+router.use(cors()); // Enable CORS for cross-origin requests
 
-
+// Route to delete a pet
 router.delete('/:petId', async (req, res) => {
     const { petId } = req.params;
+
     try {
-        // Assuming you're using a PostgreSQL query
-        const result = await pool.query('DELETE FROM pets WHERE id = $1 RETURNING *', [petId]);
-        if (result.rowCount === 0) {
+        // Attempt to delete the pet from the "pets" collection
+        const result = await db.collection('pets').deleteOne({ _id: petId });
+
+        // Check if a pet was deleted
+        if (result.deletedCount === 0) {
             return res.status(404).json({ error: 'Pet not found' });
         }
+
         res.json({ success: true, message: 'Pet deleted successfully' });
     } catch (error) {
         console.error('Error deleting pet:', error);

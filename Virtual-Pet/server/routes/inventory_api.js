@@ -2,68 +2,115 @@ const express = require("express");
 const router = express.Router();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const pool = require('../db/db'); // Import the pool from db/db.js
+const connectToDatabase = require('../db/mongoConnection'); // Updated import
+
 router.use(bodyParser.json());
 router.use(cors()); // Enable CORS for cross-origin requests
 
 router.get('/', async (req, res) => {
     try {
-        const userId = 1; // Hardcoded user ID for now
-      
-        const inventoryQuery = `SELECT * FROM inventory WHERE user_id = $1`;
-        const inventory = await pool.query(inventoryQuery, [userId]);
+        const db = await connectToDatabase(); // Get the database instance
+        const userId = 1; // Hardcoded user ID for now (replace with session-based ID if needed)
 
-        // Example queries for counts (replace with actual table and query as needed)
-        const userFoodCountQuery = `SELECT food_count FROM user_food_count WHERE user_id = $1`;
-        const userToiletriesCountQuery = `SELECT toiletry_count FROM user_toiletries_count WHERE user_id = $1`;
-        const userToysCountQuery = `SELECT toy_count FROM user_toy_count WHERE user_id = $1`;
+        // Fetch inventory
+        const inventory = await db.collection('inventory').find({ userId }).toArray();
 
-        const userFoodCount = await pool.query(userFoodCountQuery, [userId]);
-        const userToiletriesCount = await pool.query(userToiletriesCountQuery, [userId]);
-        const userToysCount = await pool.query(userToysCountQuery, [userId]);
+        // Fetch counts from separate collections
+        const userFoodCount = await db.collection('user_food_counts').findOne({ userId });
+        const userToiletriesCount = await db.collection('user_toiletries_counts').findOne({ userId });
+        const userToysCount = await db.collection('user_toy_counts').findOne({ userId });
 
-        const foodCount = userFoodCount.rows[0] ? userFoodCount.rows[0].food_count : 0;
-        const toiletriesCount = userToiletriesCount.rows[0] ? userToiletriesCount.rows[0].toiletry_count : 0;
-        const toysCount = userToysCount.rows[0] ? userToysCount.rows[0].toy_count : 0;
+        const foodCount = userFoodCount?.count || 0;
+        const toiletriesCount = userToiletriesCount?.count || 0;
+        const toysCount = userToysCount?.count || 0;
 
-        const userFood = await pool.query(`
-            SELECT uf.count, uf.item_type_id, uf.id, f.name AS food_name, f.food_image AS "foodImage", f.description AS food_description
-            FROM user_foods uf
-            JOIN foods f ON uf.item_type_id = f.id
-            WHERE uf.user_id = $1
-        `, [userId]);
+        // Fetch user food details
+        const userFood = await db.collection('user_foods')
+            .aggregate([
+                { $match: { userId } },
+                {
+                    $lookup: {
+                        from: 'foods',
+                        localField: 'itemTypeId',
+                        foreignField: '_id',
+                        as: 'foodDetails'
+                    }
+                },
+                { $unwind: '$foodDetails' },
+                {
+                    $project: {
+                        count: 1,
+                        itemTypeId: 1,
+                        id: 1,
+                        foodName: '$foodDetails.name',
+                        foodImage: '$foodDetails.image',
+                        description: '$foodDetails.description'
+                    }
+                }
+            ])
+            .toArray();
 
-        const userToiletries = await pool.query(`
-            SELECT ut.count, ut.item_type_id, ut.id, t.name AS toiletries_name, t.toiletry_image AS "toiletryImage", t.description AS toiletry_description
-            FROM user_toiletries ut
-            JOIN toiletries t ON ut.item_type_id = t.id
-            WHERE ut.user_id = $1
-        `, [userId]);
+        // Fetch user toiletries details
+        const userToiletries = await db.collection('user_toiletries')
+            .aggregate([
+                { $match: { userId } },
+                {
+                    $lookup: {
+                        from: 'toiletries',
+                        localField: 'itemTypeId',
+                        foreignField: '_id',
+                        as: 'toiletryDetails'
+                    }
+                },
+                { $unwind: '$toiletryDetails' },
+                {
+                    $project: {
+                        count: 1,
+                        itemTypeId: 1,
+                        id: 1,
+                        toiletriesName: '$toiletryDetails.name',
+                        toiletryImage: '$toiletryDetails.image',
+                        description: '$toiletryDetails.description'
+                    }
+                }
+            ])
+            .toArray();
 
-        const userToys = await pool.query(`
-            SELECT ut.count, ut.item_type_id, ut.id, ty.name AS toys_name, ty.toy_image AS "toyImage", ty.description AS toy_description
-            FROM user_toys ut
-            JOIN toys ty ON ut.item_type_id = ty.id
-            WHERE ut.user_id = $1
-        `, [userId]);
+        // Fetch user toys details
+        const userToys = await db.collection('user_toys')
+            .aggregate([
+                { $match: { userId } },
+                {
+                    $lookup: {
+                        from: 'toys',
+                        localField: 'itemTypeId',
+                        foreignField: '_id',
+                        as: 'toyDetails'
+                    }
+                },
+                { $unwind: '$toyDetails' },
+                {
+                    $project: {
+                        count: 1,
+                        itemTypeId: 1,
+                        id: 1,
+                        toysName: '$toyDetails.name',
+                        toyImage: '$toyDetails.image',
+                        description: '$toyDetails.description'
+                    }
+                }
+            ])
+            .toArray();
 
+        // Send JSON response
         res.json({
-            inventory: inventory.rows,
+            inventory,
             foodCount,
             toiletriesCount,
             toysCount,
-            userFood: userFood.rows.map(row => ({
-                ...row,
-                description: row.food_description, // Rename for consistency
-            })),
-            userToiletries: userToiletries.rows.map(row => ({
-                ...row,
-                description: row.toiletry_description, // Rename for consistency
-            })),
-            userToys: userToys.rows.map(row => ({
-                ...row,
-                description: row.toy_description, // Rename for consistency
-            })),
+            userFood,
+            userToiletries,
+            userToys
         });
 
     } catch (error) {

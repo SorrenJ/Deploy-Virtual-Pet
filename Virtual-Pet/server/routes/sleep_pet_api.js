@@ -1,33 +1,47 @@
 const express = require("express");
 const router = express.Router();
-const pool = require('../db/db'); // Import the pool from db/db.js
+const { ObjectId } = require("mongodb"); // Import ObjectId for MongoDB ID validation
+const db = require('../db/mongoConnection'); // Import MongoDB connection
 
 router.patch('/:petId', async (req, res) => {
     const { petId } = req.params;
     const { amount } = req.body;
 
     try {
-        // Fetch current pet stats from the database
-        const pet = await pool.query('SELECT energy FROM pets WHERE id = $1', [petId]);
+        // Validate the petId format
+        if (!ObjectId.isValid(petId)) {
+            return res.status(400).json({ error: "Invalid pet ID format" });
+        }
 
-        if (!pet.rows.length) {
+        // Fetch the current pet stats
+        const pet = await db.collection('pets').findOne({ _id: new ObjectId(petId) });
+
+        if (!pet) {
             return res.status(404).json({ error: 'Pet not found' });
         }
 
-        const newEnergy = Math.max(0, pet.rows[0].energy + amount); // Ensure energy doesn't go below 0
+        // Calculate the new energy value
+        const newEnergy = Math.max(0, (pet.energy || 0) + amount); // Ensure energy doesn't go below 0
 
-        // Update the energy in the database
-        await pool.query('UPDATE pets SET energy = $1 WHERE id = $2', [newEnergy, petId]);
+        // Update the pet's energy in the database
+        const result = await db.collection('pets').findOneAndUpdate(
+            { _id: new ObjectId(petId) },
+            { $set: { energy: newEnergy } },
+            { returnDocument: 'after' } // Return the updated document
+        );
 
-        // Return the updated stats with a success message
-        const updatedPet = await pool.query('SELECT * FROM pets WHERE id = $1', [petId]);
+        if (!result.value) {
+            return res.status(500).json({ error: 'Failed to update pet energy' });
+        }
+
+        // Respond with success and the updated pet data
         res.json({
-            success: true,    // Adding the success field
-            pet: updatedPet.rows[0] // Returning the updated pet data
+            success: true,
+            pet: result.value, // The updated pet document
         });
     } catch (error) {
-        console.error('Error in backend sleep:', error);
-        res.status(500).json({ error: 'Failed to sleep the pet' });
+        console.error('Error updating pet energy:', error);
+        res.status(500).json({ error: 'Failed to update pet energy' });
     }
 });
 

@@ -2,15 +2,16 @@ const { MongoClient } = require('mongodb');
 
 const uri = "mongodb+srv://soalexjao:Bionicle20!0@cluster0.yymbu.mongodb.net/beastly_bonds_development";
 
-let dbConnection;
+const client = new MongoClient(uri);
+
+let db;
 
 const connectToDatabase = async () => {
-    if (!dbConnection) {
-        const client = new MongoClient(uri);
-        dbConnection = client.db("beastly_bonds_development");
-        console.log("Connected to MongoDB");
+    if (!db) {
+        await client.connect();
+        db = client.db('beastly_bonds_development'); // Replace with your database name
     }
-    return dbConnection;
+    return db;
 };
 
 module.exports = connectToDatabase;

@@ -1,29 +1,39 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../db/db')
-
+const { ObjectId } = require('mongodb'); // Import ObjectId for MongoDB validation
+const db = require('../db/mongoConnection'); // MongoDB connection
 
 // Convert score to money
 router.post('/', async (req, res) => {
-  const { userId, score } = req.body;
-  const moneyPerScore = 10;
-  const moneyEarned = score * moneyPerScore;
+    const { userId, score } = req.body;
+    const moneyPerScore = 10;
+    const moneyEarned = score * moneyPerScore;
 
-  try {
-    await pool.query(
-      `UPDATE inventory 
-       SET money = money + $1 
-       WHERE user_id = $2`,
-      [moneyEarned, userId]
-    );
+    try {
+        // Validate userId format
+        if (!ObjectId.isValid(userId)) {
+            return res.status(400).json({ error: 'Invalid user ID format' });
+        }
 
-    const moneyResult = await pool.query('SELECT money FROM inventory WHERE user_id = $1', [userId]);
-    const money = moneyResult.rows[0] ? moneyResult.rows[0].money : 0;
-    res.json({ money });
-  } catch (error) {
-    console.error('Error converting score:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+        // Update the user's money in the inventory
+        const updateResult = await db.collection('inventory').findOneAndUpdate(
+            { userId: new ObjectId(userId) },
+            { $inc: { money: moneyEarned } }, // Increment money by the earned amount
+            { returnDocument: 'after' } // Return the updated document
+        );
+
+        if (!updateResult.value) {
+            return res.status(404).json({ error: 'Inventory not found for the user' });
+        }
+
+        const updatedMoney = updateResult.value.money || 0;
+
+        // Respond with the updated money amount
+        res.json({ money: updatedMoney });
+    } catch (error) {
+        console.error('Error converting score:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 });
 
 module.exports = router;

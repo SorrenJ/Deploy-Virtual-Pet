@@ -1,27 +1,86 @@
 const express = require("express");
 const router = express.Router();
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const pool = require('../db/db'); // Import the pool from db/db.js
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const connectToMongoDatabase = require("../db/mongoConnection"); // MongoDB connection utility
+
 router.use(bodyParser.json());
 router.use(cors());
 
 // Retrieve pets information
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-      const petsResult = await pool.query(`
-          SELECT pets.*, species.species_name, species.diet_desc, moods.mood_name, colors.color_name, sprites.image_url, personalities.personality_name
-          FROM pets
-          JOIN species ON pets.species_id = species.id
-          JOIN moods ON pets.mood_id = moods.id
-          JOIN colors ON pets.color_id = colors.id
-          JOIN sprites ON pets.sprite_id = sprites.id
-          JOIN personalities ON pets.personality_id = personalities.id
-      `);
-      res.json(petsResult.rows);  // Return pets data as JSON
+    const db = await connectToMongoDatabase();
+
+    // Aggregate pets with related data from species, moods, colors, sprites, and personalities
+    const pets = await db
+      .collection("pets")
+      .aggregate([
+        {
+          $lookup: {
+            from: "species",
+            localField: "species_id",
+            foreignField: "_id",
+            as: "species_info",
+          },
+        },
+        {
+          $lookup: {
+            from: "moods",
+            localField: "mood_id",
+            foreignField: "_id",
+            as: "mood_info",
+          },
+        },
+        {
+          $lookup: {
+            from: "colors",
+            localField: "color_id",
+            foreignField: "_id",
+            as: "color_info",
+          },
+        },
+        {
+          $lookup: {
+            from: "sprites",
+            localField: "sprite_id",
+            foreignField: "_id",
+            as: "sprite_info",
+          },
+        },
+        {
+          $lookup: {
+            from: "personalities",
+            localField: "personality_id",
+            foreignField: "_id",
+            as: "personality_info",
+          },
+        },
+        {
+          $project: {
+            id: 1,
+            name: 1,
+            age: 1,
+            adopted_at: 1,
+            energy: 1,
+            happiness: 1,
+            hunger: 1,
+            cleanliness: 1,
+            "species_name": { $arrayElemAt: ["$species_info.species_name", 0] },
+            "diet_desc": { $arrayElemAt: ["$species_info.diet_desc", 0] },
+            "mood_name": { $arrayElemAt: ["$mood_info.mood_name", 0] },
+            "color_name": { $arrayElemAt: ["$color_info.color_name", 0] },
+            "sprite_image_url": { $arrayElemAt: ["$sprite_info.image_url", 0] },
+            "personality_name": { $arrayElemAt: ["$personality_info.trait_name", 0] },
+          },
+        },
+      ])
+      .toArray();
+
+    res.json(pets); // Return pets data as JSON
   } catch (err) {
-      console.error('Error fetching pets:', err);
-      res.status(500).send('Server error');
+    console.error("Error fetching pets:", err);
+    res.status(500).json({ error: "Server error" });
   }
 });
 

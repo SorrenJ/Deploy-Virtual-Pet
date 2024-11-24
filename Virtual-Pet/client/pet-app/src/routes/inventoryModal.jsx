@@ -18,16 +18,21 @@ const InventoryModal = ({ isOpen, onRequestClose }) => {
 
     const fetchGeneralData = async () => {
         try {
-            const response = await fetch(`https://virtual-pet-backend-3nat.onrender.com/api/inventory`);
+            const response = await fetch(`/api/inventory`);
+            if (!response.ok) {
+                throw new Error(`API request failed with status ${response.status}`);
+            }
             const data = await response.json();
+    
             setPets(data.pets || []);
-            setUserFood(data.userFood.filter(item => item.count > 0) || []);
-            setUserToiletries(data.userToiletries.filter(item => item.count > 0) || []);
-            setUserToys(data.userToys.filter(item => item.count > 0) || []);
+            setUserFood((data.userFood || []).filter(item => item.count > 0));
+            setUserToiletries((data.userToiletries || []).filter(item => item.count > 0));
+            setUserToys((data.userToys || []).filter(item => item.count > 0));
         } catch (error) {
             console.error('Error fetching general data:', error);
         }
     };
+    
 
     const handleComponentToggle = (componentNumber) => {
         setVisibleComponent(componentNumber);
