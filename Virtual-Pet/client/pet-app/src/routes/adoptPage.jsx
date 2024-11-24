@@ -1,117 +1,91 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import {Helmet} from 'react-helmet'
-import SpeciesList from '../components/SpeciesList';  
-import PetsList from '../components/PetList';        
+import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+import SpeciesList from '../components/SpeciesList';
+import PetsList from '../components/PetList';
 import LoadingScreen from '../components/loadingScreen';
+
 function AdoptPage() {
   const [speciesList, setSpeciesList] = useState([]);
   const [petsList, setPetsList] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false); // State to manage the transition effect
-  const navigate = useNavigate();  // Initialize useNavigate hook for navigation
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-
-        const speciesResponse = await fetch('https://virtual-pet-backend-3nat.onrender.com/api/species'); 
-        const petsResponse = await fetch('https://virtual-pet-backend-3nat.onrender.com/api/pets'); 
-      
-        // const speciesResponse = await fetch('/api/species', {
-        //   headers: { 'Cache-Control': 'no-cache' }
-        // });
-        // const petsResponse = await fetch('/api/pets', {
-        //   headers: { 'Cache-Control': 'no-cache' }
-        // });
-        
+        const speciesResponse = await fetch('/api/species');
+        if (!speciesResponse.ok) throw new Error('Failed to fetch species');
         
         const species = await speciesResponse.json();
-console.log("species:", species);
-
-        const pets = await petsResponse.json();
-        console.log("pets:", pets);
-  
+        console.log("Fetched species:", species);
+    
+        if (!Array.isArray(species)) {
+          throw new Error('Invalid species data format');
+        }
+    
         setSpeciesList(species);
-        setPetsList(pets);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching species:', error);
+        setError(error.message); // Display a user-friendly error message
       }
     };
-  
+    
+    
+
     fetchData();
   }, []);
 
-
-
-
   const adoptPet = async (speciesId, petName, colorId) => {
     try {
-      const response = await fetch('https://virtual-pet-backend-3nat.onrender.com/api/adopt-pet', {
+      const response = await fetch('/api/adopt-pet', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ species_id: speciesId, color_id: colorId }),
       });
 
-      if (response.ok) {
-        const adoptedPet = await response.json();
-        
-        const nameResponse = await fetch('https://virtual-pet-backend-3nat.onrender.com/api/set-pet-name', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ pet_id: adoptedPet.id, name: petName }),
-        });
-
-        if (nameResponse.ok) {
-          alert('Pet adopted and named successfully!');
-
-           // Trigger loading after the alert is confirmed
-           setLoading(true);
-           setTimeout(() => {
-           setIsTransitioning(true); // Start transition after loading
-           // Add a slight delay before navigating to simulate loading
-           setTimeout(() => {
-            setLoading(false); // Hide loading after the transition
-            navigate(`/home?newPetId=${adoptedPet.id}`);    
-            }, 500);
-            }, 4000); // You can adjust or remove the delay as needed
-          
-        
-        } else {
-          alert('Error setting pet name.');
-        }
-      } else {
-        alert('Error adopting pet.');
+      if (!response.ok) {
+        throw new Error('Failed to adopt pet');
       }
+
+      const adoptedPet = await response.json();
+
+      const nameResponse = await fetch('/api/set-pet-name', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pet_id: adoptedPet.id, name: petName }),
+      });
+
+      if (!nameResponse.ok) {
+        throw new Error('Failed to set pet name');
+      }
+
+      alert('Pet adopted and named successfully!');
+      setLoading(true);
+      setTimeout(() => {
+        setIsTransitioning(true);
+        navigate(`/home?newPetId=${adoptedPet.id}`);
+      }, 4000);
     } catch (error) {
       console.error('Error adopting pet:', error);
+      alert(error.message);
     }
   };
 
-  return (
-    <>
-      {loading ? (
-        <LoadingScreen isTransitioning={isTransitioning} /> // Show loading screen while loading after alert
-      ) : (
-        <div>
-          <div className="overlay"></div>
-      
-        
-          <Helmet><title>Adopt</title></Helmet>
-          <br/>
-          <br/>
-          <br/>
-          <h1 style={{ fontSize: '32px' }}>Choose a species to adopt</h1>
+  // if (loading) {
+  //   return <LoadingScreen isTransitioning={isTransitioning} />;
+  // }
 
-          <SpeciesList speciesList={speciesList} adoptPet={adoptPet} />
-          <PetsList petsList={petsList} />
-        </div>
-      )}
-    </>
+  return (
+    <div>
+      {error && <div className="error-message">{error}</div>}
+      <Helmet><title>Adopt</title></Helmet>
+      <h1>Choose a species to adopt</h1>
+      <SpeciesList speciesList={speciesList} adoptPet={adoptPet} />
+      <PetsList petsList={petsList} />
+    </div>
   );
 }
 

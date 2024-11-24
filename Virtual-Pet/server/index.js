@@ -4,9 +4,28 @@ const bodyParser = require('body-parser');
 require('dotenv').config(); // Load environment variables from the .env file
 
 // Import the pool from db.js to handle PostgreSQL queries
-const pool = require('./db/db'); 
+// const pool = require('./db/db'); 
+
+const connectToMongoDatabase = require('./db/mongoConnection');
+
+
+
+
 
 const app = express();
+
+const main = async () => {
+    const db = await connectToMongoDatabase();
+
+    // Example: Fetch all documents from the 'foods' collection
+    const all = await db.collection('all').find().toArray();
+    console.log("All:", all);
+};
+
+main().catch(console.error);
+
+
+
 
 // Middleware
 
@@ -30,10 +49,36 @@ app.use(bodyParser.json());
 app.use(express.json());
 
 // Serve static files from the "db" directory (if needed)
-app.use('/db', express.static('db'));
+// app.use('/db', express.static('db'));
 
 // Set up EJS as the templating engine (if needed)
 app.set('view engine', 'ejs');
+
+
+
+
+
+// Connect to MongoDB
+const connectMongoDB = async () => {
+    db = await connectToMongoDatabase();
+  };
+  
+  // Call the connection function when the server starts
+  connectMongoDB().catch(console.error);
+
+
+// Routes
+app.get('/api/all', async (req, res) => {
+    try {
+      // Fetch data from the MongoDB collection
+      const all = await db.collection('all').find().toArray();
+      res.status(200).json(all);
+    } catch (err) {
+      console.error('Error fetching data:', err);
+      res.status(500).send('Server error');
+    }
+  });
+
 
 // Routes
 
@@ -67,96 +112,111 @@ app.use('/api/sleep-pet', sleepApiRoute);
 app.use('/api/delete-pet', deleteApiRoute);
 
 // Start the server on port 5000
-const PORT = process.env.PORT || 5000;
+// const PORT = process.env.PORT || 5000;
+
+const PORT = 5000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
 
 
-// Adoption route
-app.get('/api/adopt', async (req, res) => {
-    try {
-        // Query the species table
-        const speciesResult = await pool.query(`
-            SELECT *
-            FROM species
-            `);
-        const species = speciesResult.rows;
-
-        // Query the pets table joined with species
-        const petsResult = await pool.query(`
-            SELECT pets.*, species.species_name, species.diet_desc, moods.mood_name, colors.color_name, sprites.image_url, personalities.personality_name
-            FROM pets
-            JOIN species ON pets.species_id = species.id
-            JOIN moods ON pets.mood_id = moods.id
-            JOIN colors ON pets.color_id = colors.id
-            JOIN sprites ON pets.sprite_id = sprites.id
-            JOIN personalities ON pets.personality_id = personalities.id
-        `);
-        const pets = petsResult.rows;
-
-        // Render the 'adopt.ejs' template and pass both species and pets data to it
-        res.render('adopt', { species, pets });
-    } catch (err) {
-        console.error('Error fetching data:', err);
-        res.status(500).send('Server error');
-    }
-});
-
-
-
+// Example: Adoption Route using MongoDB
 app.post('/api/adopt-pet', async (req, res) => {
-    const { species_id, color_id } = req.body;  // Get species_id and color_id from the request
-    const userId = 1;  // Hardcoded user ID for now
+    const { species_id, color_id } = req.body; // Get species_id and color_id from the request
+    const userId = 1; // Hardcoded user ID for now
 
-    console.log('Received species_id:', species_id, 'and color_id:', color_id);  // Debug log
+    console.log('Received species_id:', species_id, 'and color_id:', color_id); // Debug log
 
     try {
         // Fetch the appropriate sprite_id based on the selected species_id, mood, and color
-        const spriteResult = await pool.query(`
-            SELECT id
-            FROM sprites
-            WHERE species_id = $1
-              AND color_id = $2  -- Use the selected color_id from the request
-              AND mood_id = (SELECT id FROM moods WHERE mood_name = 'default' LIMIT 1)
-            LIMIT 1
-        `, [species_id, color_id]);  // Pass both species_id and color_id as parameters
+        const sprite = await db.collection('sprites').findOne({
+            species_id: species_id,
+            color_id: color_id,
+            mood_id: await db.collection('moods').findOne({ mood_name: 'default' }).then((mood) => mood?._id),
+        });
 
-        if (spriteResult.rows.length === 0) {
+        if (!sprite) {
             console.log('No matching sprite found for the given species and color.');
             return res.status(400).json({ error: 'No matching sprite found for the given species and color.' });
         }
 
-        const sprite_id = spriteResult.rows[0].id;  // Get the first matching sprite
+        const sprite_id = sprite._id; // Get the sprite ID
 
         // Insert the new pet (without name initially)
-        const newPetResult = await pool.query(`
-            INSERT INTO pets 
-            (user_id, species_id, age, adopted_at, sprite_id, mood_id, color_id, personality_id, update_time, energy, happiness, hunger, cleanliness)
-            VALUES 
-            (
-              $1,    -- user_id
-              $2,    -- species_id
-              1,     -- Hardcoded age
-              NOW(), -- adopted_at (current timestamp)
-              $3,    -- sprite_id
-              (SELECT id FROM moods WHERE mood_name = 'default' LIMIT 1), 
-              $4,    -- color_id from the request
-              (SELECT id FROM personalities WHERE personality_name = 'Gloomy' LIMIT 1), 
-              NOW(), 
-              100, 100, 100, 100
-            )
-            RETURNING *
-        `, [userId, species_id, sprite_id, color_id]);  // Use species_id, sprite_id, and color_id as parameters
+        const newPet = {
+            user_id: userId,
+            species_id: species_id,
+            age: 1, // Hardcoded age
+            adopted_at: new Date(), // Current timestamp
+            sprite_id: sprite_id,
+            mood_id: await db.collection('moods').findOne({ mood_name: 'default' }).then((mood) => mood?._id),
+            color_id: color_id,
+            personality_id: await db.collection('personalities').findOne({ personality_name: 'Gloomy' }).then((personality) => personality?._id),
+            update_time: new Date(),
+            energy: 100,
+            happiness: 100,
+            hunger: 100,
+            cleanliness: 100,
+        };
 
-        const newPet = newPetResult.rows[0];  // Get the newly created pet
+        const result = await db.collection('pets').insertOne(newPet);
 
-        res.status(201).json(newPet);  // Send the newly created pet back to the client
+        res.status(201).json(result.ops[0]); // Send the newly created pet back to the client
     } catch (err) {
         console.error('Error inserting pet:', err.message);
         res.status(500).send('Server error');
     }
 });
+
+
+
+  app.post('/api/adopt-pet', async (req, res) => {
+    const { species_id, color_id } = req.body; // Get species_id and color_id from the request
+    const userId = 1; // Hardcoded user ID for now
+
+    console.log('Received species_id:', species_id, 'and color_id:', color_id); // Debug log
+
+    try {
+        // Fetch the appropriate sprite_id based on the selected species_id, mood, and color
+        const sprite = await db.collection('sprites').findOne({
+            species_id: species_id,
+            color_id: color_id,
+            mood_id: await db.collection('moods').findOne({ mood_name: 'default' }).then((mood) => mood?._id),
+        });
+
+        if (!sprite) {
+            console.log('No matching sprite found for the given species and color.');
+            return res.status(400).json({ error: 'No matching sprite found for the given species and color.' });
+        }
+
+        const sprite_id = sprite._id; // Get the sprite ID
+
+        // Insert the new pet (without name initially)
+        const newPet = {
+            user_id: userId,
+            species_id: species_id,
+            age: 1, // Hardcoded age
+            adopted_at: new Date(), // Current timestamp
+            sprite_id: sprite_id,
+            mood_id: await db.collection('moods').findOne({ mood_name: 'default' }).then((mood) => mood?._id),
+            color_id: color_id,
+            personality_id: await db.collection('personalities').findOne({ personality_name: 'Gloomy' }).then((personality) => personality?._id),
+            update_time: new Date(),
+            energy: 100,
+            happiness: 100,
+            hunger: 100,
+            cleanliness: 100,
+        };
+
+        const result = await db.collection('pets').insertOne(newPet);
+
+        res.status(201).json(result.ops[0]); // Send the newly created pet back to the client
+    } catch (err) {
+        console.error('Error inserting pet:', err.message);
+        res.status(500).send('Server error');
+    }
+});
+
 
 
 

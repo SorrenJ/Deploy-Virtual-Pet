@@ -33,8 +33,8 @@
             "clean_mod": 3,
             "lifespan": 300,
             "diet_type": 3,
-            "diet_desc": "The simple-minded Slugaboo. Normally found in trash.",
-            "image": "They are loving monsters. They tend to reek."
+            "diet_desc": "The simple-minded Slugaboo. Normally found in trash.They are loving monsters. They tend to reek.",
+            "image": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816936/Slugaboo_Yellow_Default.png"
         },
         {
             "species_name": "Hippostyx",
@@ -44,8 +44,8 @@
             "clean_mod": 2,
             "lifespan": 300,
             "diet_type": 2,
-            "diet_desc": "Hippostyx are kind creatures who dwell in the fiery seas of the afterlife. They are kind to generous souls.",
-            "image": "Offering them safe passage through the underworld. Of course, if you don’t pay the Hippostyx with a treat..."
+            "diet_desc": "Hippostyx are kind creatures who dwell in the fiery seas of the afterlife. They are kind to generous souls.Offering them safe passage through the underworld. Of course, if you don’t pay the Hippostyx with a treat...",
+            "image": "https://res.cloudinary.com/deszclhtq/image/upload/v1727813936/Hippostyx_default.gif"
         },
         {
             "species_name": "Vulinquent",
@@ -55,8 +55,8 @@
             "clean_mod": 8,
             "lifespan": 300,
             "diet_type": 1,
-            "diet_desc": "Vulinquent are devious manipulators.",
-            "image": "Enjoying the torment of others. They often use their nose to find their prey."
+            "diet_desc": "Vulinquent are devious manipulators.Enjoying the torment of others. They often use their nose to find their prey.",
+            "image": "https://res.cloudinary.com/deszclhtq/image/upload/v1728521781/Vulture_Neutral_fve8gz.gif"
         }
     ],
     "sprites": [
