@@ -1,0 +1,1957 @@
+
+{
+    "moods": [
+        { "mood_name": "default" },
+        { "mood_name": "acknowledge" },
+        { "mood_name": "happy" },
+        { "mood_name": "feeding" },
+        { "mood_name": "hungry" },
+        { "mood_name": "tired" },
+        { "mood_name": "sleep" },
+        { "mood_name": "wake" },
+        { "mood_name": "dirty" },
+        { "mood_name": "clean" },
+        { "mood_name": "angry" },
+        { "mood_name": "sad" },
+        { "mood_name": "pet" },
+        { "mood_name": "dead" }
+    ],
+    "colors": [
+        { "color_name": "yellow" },
+        { "color_name": "red" },
+        { "color_name": "blue" },
+        { "color_name": "green" },
+        { "color_name": "pink" },
+        { "color_name": "orange" }
+    ],
+    "species": [
+        {
+            "species_name": "Slugaboo",
+            "hunger_mod": 3,
+            "happy_mod": 3,
+            "energy_mod": 3,
+            "clean_mod": 3,
+            "lifespan": 300,
+            "diet_type": 3,
+            "diet_desc": "The simple-minded Slugaboo. Normally found in trash.",
+            "image": "They are loving monsters. They tend to reek."
+        },
+        {
+            "species_name": "Hippostyx",
+            "hunger_mod": 1,
+            "happy_mod": 5,
+            "energy_mod": 4,
+            "clean_mod": 2,
+            "lifespan": 300,
+            "diet_type": 2,
+            "diet_desc": "Hippostyx are kind creatures who dwell in the fiery seas of the afterlife. They are kind to generous souls.",
+            "image": "Offering them safe passage through the underworld. Of course, if you don’t pay the Hippostyx with a treat..."
+        },
+        {
+            "species_name": "Vulinquent",
+            "hunger_mod": 10,
+            "happy_mod": 6,
+            "energy_mod": 4,
+            "clean_mod": 8,
+            "lifespan": 300,
+            "diet_type": 1,
+            "diet_desc": "Vulinquent are devious manipulators.",
+            "image": "Enjoying the torment of others. They often use their nose to find their prey."
+        }
+    ],
+    "sprites": [
+        {
+            "color_id": 1,
+            "species_id": 1,
+            "mood_id": 1,
+            "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816936/Slugaboo_Yellow_Default.png"
+        },
+        {
+            "color_id": 1,
+            "species_id": 1,
+            "mood_id": 2,
+            "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816959/Slugaboo_Yellow_Acknowledge.png"
+        },
+        {
+            "color_id": 1,
+            "species_id": 1,
+            "mood_id": 3,
+            "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816913/Slugaboo_Yellow_Happy.png"
+        },
+        {
+            "color_id": 1,
+            "species_id": 1,
+            "mood_id": 4,
+            "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816921/Slugaboo_Yellow_Feeding.png"
+        },
+        {
+            "color_id": 1,
+            "species_id": 1,
+            "mood_id": 5,
+            "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816906/Slugaboo_Yellow_Hungry.png"
+        },
+        {
+            "color_id": 1,
+            "species_id": 1,
+            "mood_id": 6,
+            "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816876/Slugaboo_Yellow_Tired.png"
+        },
+        {
+            "color_id": 1,
+            "species_id": 1,
+            "mood_id": 7,
+            "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816884/Slugaboo_Yellow_Sleep.png"
+        },
+        {
+            "color_id": 1,
+            "species_id": 1,
+            "mood_id": 8,
+            "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727819256/Slugaboo_Yellow_Wake.png"
+        },
+        {
+            "color_id": 1,
+            "species_id": 1,
+            "mood_id": 9,
+            "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816928/Slugaboo_Yellow_Dirty.png"
+        },
+        {
+            "color_id": 1,
+            "species_id": 1,
+            "mood_id": 10,
+            "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816943/Slugaboo_Yellow_Clean.png"
+        },
+        {
+            "color_id": 1,
+            "species_id": 1,
+            "mood_id": 11,
+            "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816952/Slugaboo_Yellow_Angry.png"
+        },
+        {
+            "color_id": 1,
+            "species_id": 1,
+            "mood_id": 12,
+            "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816891/Slugaboo_Yellow_Sad.png"
+        },
+        {
+            "color_id": 1,
+            "species_id": 1,
+            "mood_id": 13,
+            "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816898/Slugaboo_Yellow_Pet.png"
+        },
+        {
+            "color_id": 1,
+            "species_id": 1,
+            "mood_id": 14,
+            "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728293262/Slugaboo_dead_daiknw.png"
+        },
+        {
+            "color_id": 2,
+            "species_id": 1,
+            "mood_id": 1,
+            "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816839/Slugaboo_Red_Default.png"
+        },
+        {
+            "color_id": 2,
+            "species_id": 1,
+            "mood_id": 2,
+            "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816861/Slugaboo_Red_Acknowledge.png"
+        },
+        {
+            "color_id": 2,
+            "species_id": 1,
+            "mood_id": 3,
+            "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816789/Slugaboo_Red_Happy.png"
+        },
+ {
+    "color_id": 2,
+    "species_id": 1,
+    "mood_id": 4,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816796/Slugaboo_Red_Feeding.png"
+},
+{
+    "color_id": 2,
+    "species_id": 1,
+    "mood_id": 5,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816782/Slugaboo_Red_Hungry.png"
+},
+{
+    "color_id": 2,
+    "species_id": 1,
+    "mood_id": 6,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816751/Slugaboo_Red_Tired.png"
+},
+{
+    "color_id": 2,
+    "species_id": 1,
+    "mood_id": 7,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816759/Slugaboo_Red_Sleep.png"
+},
+{
+    "color_id": 2,
+    "species_id": 1,
+    "mood_id": 8,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816744/Slugaboo_Red_Wake.png"
+},
+{
+    "color_id": 2,
+    "species_id": 1,
+    "mood_id": 9,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816832/Slugaboo_Red_Dirty.png"
+},
+{
+    "color_id": 2,
+    "species_id": 1,
+    "mood_id": 10,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816846/Slugaboo_Red_Clean.png"
+},
+{
+    "color_id": 2,
+    "species_id": 1,
+    "mood_id": 11,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816854/Slugaboo_Red_Angry.png"
+},
+{
+    "color_id": 2,
+    "species_id": 1,
+    "mood_id": 12,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816766/Slugaboo_Red_Sad.png"
+},
+{
+    "color_id": 2,
+    "species_id": 1,
+    "mood_id": 13,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727816773/Slugaboo_Red_Pet.png"
+},
+{
+    "color_id": 2,
+    "species_id": 1,
+    "mood_id": 14,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728293262/Slugaboo_dead_daiknw.png"
+},
+{
+    "color_id": 3,
+    "species_id": 1,
+    "mood_id": 1,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818655/Slugaboo_Blue_Default.png"
+},
+{
+    "color_id": 3,
+    "species_id": 1,
+    "mood_id": 2,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818716/Slugaboo_Blue_Acknowledge.png"
+},
+{
+    "color_id": 3,
+    "species_id": 1,
+    "mood_id": 3,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818406/Slugaboo_Blue_Happy.png"
+},
+{
+    "color_id": 3,
+    "species_id": 1,
+    "mood_id": 4,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818557/Slugaboo_Blue_Feeding.png"
+},
+{
+    "color_id": 3,
+    "species_id": 1,
+    "mood_id": 5,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818398/Slugaboo_Blue_Hungry.png"
+},
+{
+    "color_id": 3,
+    "species_id": 1,
+    "mood_id": 6,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818365/Slugaboo_Blue_Tired.png"
+},
+{
+    "color_id": 3,
+    "species_id": 1,
+    "mood_id": 7,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818373/Slugaboo_Blue_Sleep.png"
+},
+{
+    "color_id": 3,
+    "species_id": 1,
+    "mood_id": 8,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818356/Slugaboo_Blue_Wake.png"
+},
+{
+    "color_id": 3,
+    "species_id": 1,
+    "mood_id": 9,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818638/Slugaboo_Blue_Dirty.png"
+},
+{
+    "color_id": 3,
+    "species_id": 1,
+    "mood_id": 10,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818666/Slugaboo_Blue_Clean.png"
+},
+{
+    "color_id": 3,
+    "species_id": 1,
+    "mood_id": 11,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818683/Slugaboo_Blue_Angry.png"
+},
+{
+    "color_id": 3,
+    "species_id": 1,
+    "mood_id": 12,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818381/Slugaboo_Blue_Sad.png"
+},
+{
+    "color_id": 3,
+    "species_id": 1,
+    "mood_id": 13,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818389/Slugaboo_Blue_Pet.png"
+},
+{
+    "color_id": 3,
+    "species_id": 1,
+    "mood_id": 14,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728293262/Slugaboo_dead_daiknw.png"
+},
+{
+    "color_id": 4,
+    "species_id": 1,
+    "mood_id": 1,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818323/Slugaboo_Green_Default.png"
+},
+
+{
+    "color_id": 4,
+    "species_id": 1,
+    "mood_id": 2,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818348/Slugaboo_Green_Acknowledge.png"
+},
+{
+    "color_id": 4,
+    "species_id": 1,
+    "mood_id": 3,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818299/Slugaboo_Green_Happy.png"
+},
+{
+    "color_id": 4,
+    "species_id": 1,
+    "mood_id": 4,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818307/Slugaboo_Green_Feeding.png"
+},
+{
+    "color_id": 4,
+    "species_id": 1,
+    "mood_id": 5,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818195/Slugaboo_Green_Hungry.png"
+},
+{
+    "color_id": 4,
+    "species_id": 1,
+    "mood_id": 6,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818142/Slugaboo_Green_Tired.png"
+},
+{
+    "color_id": 4,
+    "species_id": 1,
+    "mood_id": 7,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818150/Slugaboo_Green_Sleep.png"
+},
+{
+    "color_id": 4,
+    "species_id": 1,
+    "mood_id": 8,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818132/Slugaboo_Green_Wake.png"
+},
+{
+    "color_id": 4,
+    "species_id": 1,
+    "mood_id": 9,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818315/Slugaboo_Green_Dirty.png"
+},
+{
+    "color_id": 4,
+    "species_id": 1,
+    "mood_id": 10,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818331/Slugaboo_Green_Clean.png"
+},
+{
+    "color_id": 4,
+    "species_id": 1,
+    "mood_id": 11,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818340/Slugaboo_Green_Angry.png"
+},
+{
+    "color_id": 4,
+    "species_id": 1,
+    "mood_id": 12,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818178/Slugaboo_Green_Sad.png"
+},
+{
+    "color_id": 4,
+    "species_id": 1,
+    "mood_id": 13,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818186/Slugaboo_Green_Pet.png"
+},
+{
+    "color_id": 4,
+    "species_id": 1,
+    "mood_id": 14,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728293262/Slugaboo_dead_daiknw.png"
+},
+{
+    "color_id": 5,
+    "species_id": 1,
+    "mood_id": 1,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727817971/Slugaboo_Pink_Default.png"
+},
+{
+    "color_id": 5,
+    "species_id": 1,
+    "mood_id": 2,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727817995/Slugaboo_Pink_Acknowledge.png"
+},
+{
+    "color_id": 5,
+    "species_id": 1,
+    "mood_id": 3,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727817653/Slugaboo_Pink_Happy.png"
+},
+{
+    "color_id": 5,
+    "species_id": 1,
+    "mood_id": 4,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727817796/Slugaboo_Pink_Feeding.png"
+},
+{
+    "color_id": 5,
+    "species_id": 1,
+    "mood_id": 5,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727817645/Slugaboo_Pink_Hungry.png"
+},
+{
+    "color_id": 5,
+    "species_id": 1,
+    "mood_id": 6,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727817318/Slugaboo_Pink_Tired.png"
+},
+{
+    "color_id": 5,
+    "species_id": 1,
+    "mood_id": 7,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727817325/Slugaboo_Pink_Sleep.png"
+},
+{
+    "color_id": 5,
+    "species_id": 1,
+    "mood_id": 8,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727817142/Slugaboo_Pink_Wake.png"
+},
+{
+    "color_id": 5,
+    "species_id": 1,
+    "mood_id": 9,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727817804/Slugaboo_Pink_Dirty.png"
+},
+{
+    "color_id": 5,
+    "species_id": 1,
+    "mood_id": 10,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727817978/Slugaboo_Pink_Clean.png"
+},
+{
+    "color_id": 5,
+    "species_id": 1,
+    "mood_id": 11,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727817986/Slugaboo_Pink_Angry.png"
+},
+{
+    "color_id": 5,
+    "species_id": 1,
+    "mood_id": 12,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727817493/Slugaboo_Pink_Sad.png"
+},
+{
+    "color_id": 5,
+    "species_id": 1,
+    "mood_id": 13,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727817637/Slugaboo_Pink_Pet.png"
+},
+{
+    "color_id": 5,
+    "species_id": 1,
+    "mood_id": 14,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728293262/Slugaboo_dead_daiknw.png"
+},
+{
+    "color_id": 6,
+    "species_id": 1,
+    "mood_id": 1,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818099/Slugaboo_Orange_Default.png"
+},
+
+{
+    "color_id": 6,
+    "species_id": 1,
+    "mood_id": 2,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818123/Slugaboo_Orange_Acknowledge.png"
+},
+{
+    "color_id": 6,
+    "species_id": 1,
+    "mood_id": 3,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818075/Slugaboo_Orange_Happy.png"
+},
+{
+    "color_id": 6,
+    "species_id": 1,
+    "mood_id": 4,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818083/Slugaboo_Orange_Feeding.png"
+},
+{
+    "color_id": 6,
+    "species_id": 1,
+    "mood_id": 5,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818062/Slugaboo_Orange_Hungry.png"
+},
+{
+    "color_id": 6,
+    "species_id": 1,
+    "mood_id": 6,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818022/Slugaboo_Orange_Tired.png"
+},
+{
+    "color_id": 6,
+    "species_id": 1,
+    "mood_id": 7,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818030/Slugaboo_Orange_Sleep.png"
+},
+{
+    "color_id": 6,
+    "species_id": 1,
+    "mood_id": 8,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818015/Slugaboo_Orange_Wake.png"
+},
+{
+    "color_id": 6,
+    "species_id": 1,
+    "mood_id": 9,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818092/Slugaboo_Orange_Dirty.png"
+},
+{
+    "color_id": 6,
+    "species_id": 1,
+    "mood_id": 10,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818107/Slugaboo_Orange_Clean.png"
+},
+{
+    "color_id": 6,
+    "species_id": 1,
+    "mood_id": 11,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818115/Slugaboo_Orange_Angry.png"
+},
+{
+    "color_id": 6,
+    "species_id": 1,
+    "mood_id": 12,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818040/Slugaboo_Orange_Sad.png"
+},
+{
+    "color_id": 6,
+    "species_id": 1,
+    "mood_id": 13,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1727818052/Slugaboo_Orange_Pet.png"
+},
+{
+    "color_id": 6,
+    "species_id": 1,
+    "mood_id": 14,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728293262/Slugaboo_dead_daiknw.png"
+},
+{
+    "color_id": 1,
+    "species_id": 2,
+    "mood_id": 1,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728152619/Hippo_Yellow_Default.gif"
+},
+{
+    "color_id": 1,
+    "species_id": 2,
+    "mood_id": 2,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147593/Hippo_Yellow_Acknowledge.png"
+},
+{
+    "color_id": 1,
+    "species_id": 2,
+    "mood_id": 3,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147593/Hippo_Yellow_Happy.png"
+},
+{
+    "color_id": 1,
+    "species_id": 2,
+    "mood_id": 4,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728153925/Hippo_Yellow_Feeding.gif"
+},
+{
+    "color_id": 1,
+    "species_id": 2,
+    "mood_id": 5,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147589/Hippo_Yellow_Hungry.png"
+},
+{
+    "color_id": 1,
+    "species_id": 2,
+    "mood_id": 6,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147588/Hippo_Yellow_Tired.png"
+},
+{
+    "color_id": 1,
+    "species_id": 2,
+    "mood_id": 7,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147587/Hippo_Yellow_Sleep.png"
+},
+{
+    "color_id": 1,
+    "species_id": 2,
+    "mood_id": 8,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147586/Hippo_Yellow_Wake.png"
+},
+{
+    "color_id": 1,
+    "species_id": 2,
+    "mood_id": 9,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147585/Hippo_Yellow_Dirty.png"
+},
+{
+    "color_id": 1,
+    "species_id": 2,
+    "mood_id": 10,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147591/Hippo_Yellow_Cleaned.png"
+},
+{
+    "color_id": 1,
+    "species_id": 2,
+    "mood_id": 11,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147584/Hippo_Yellow_Mad.png"
+},
+{
+    "color_id": 1,
+    "species_id": 2,
+    "mood_id": 12,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147585/Hippo_Yellow_Sad.png"
+},
+{
+    "color_id": 1,
+    "species_id": 2,
+    "mood_id": 13,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147592/Hippo_Yellow_Pet.png"
+},
+{
+    "color_id": 1,
+    "species_id": 2,
+    "mood_id": 14,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728148089/Hippo_Dead_zrmf4i.png"
+},
+
+{
+    "color_id": 2,
+    "species_id": 2,
+    "mood_id": 1,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728148547/Hippo_Red_Default.gif"
+},
+{
+    "color_id": 2,
+    "species_id": 2,
+    "mood_id": 2,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728148533/Hippo_Red_Acknowledge.png"
+},
+{
+    "color_id": 2,
+    "species_id": 2,
+    "mood_id": 3,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728148531/Hippo_Red_Happy.png"
+},
+{
+    "color_id": 2,
+    "species_id": 2,
+    "mood_id": 4,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728153931/Hippo_Red_Feeding.gif"
+},
+{
+    "color_id": 2,
+    "species_id": 2,
+    "mood_id": 5,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728148530/Hippo_Red_Hungry.png"
+},
+{
+    "color_id": 2,
+    "species_id": 2,
+    "mood_id": 6,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728148529/Hippo_Red_Tired.png"
+},
+{
+    "color_id": 2,
+    "species_id": 2,
+    "mood_id": 7,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728148528/Hippo_Red_Sleep.png"
+},
+{
+    "color_id": 2,
+    "species_id": 2,
+    "mood_id": 8,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728148527/Hippo_Red_Wake.png"
+},
+{
+    "color_id": 2,
+    "species_id": 2,
+    "mood_id": 9,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728148526/Hippo_Red_Dirty.png"
+},
+{
+    "color_id": 2,
+    "species_id": 2,
+    "mood_id": 10,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728148532/Hippo_Red_Cleaned.png"
+},
+{
+    "color_id": 2,
+    "species_id": 2,
+    "mood_id": 11,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728148525/Hippo_Red_Mad.png"
+},
+{
+    "color_id": 2,
+    "species_id": 2,
+    "mood_id": 12,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728148526/Hippo_Red_Sad.png"
+},
+{
+    "color_id": 2,
+    "species_id": 2,
+    "mood_id": 13,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728148534/Hippo_Red_Pet.png"
+},
+{
+    "color_id": 2,
+    "species_id": 2,
+    "mood_id": 14,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728148089/Hippo_Dead_zrmf4i.png"
+},
+{
+    "color_id": 3,
+    "species_id": 2,
+    "mood_id": 1,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728152619/Hippo_Blue_Default.gif"
+},
+{
+    "color_id": 3,
+    "species_id": 2,
+    "mood_id": 2,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147593/Hippo_Blue_Acknowledge.png"
+},
+{
+    "color_id": 3,
+    "species_id": 2,
+    "mood_id": 3,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147593/Hippo_Blue_Happy.png"
+},
+{
+    "color_id": 3,
+    "species_id": 2,
+    "mood_id": 4,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728153925/Hippo_Blue_Feeding.gif"
+},
+{
+    "color_id": 3,
+    "species_id": 2,
+    "mood_id": 5,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147589/Hippo_Blue_Hungry.png"
+},
+{
+    "color_id": 3,
+    "species_id": 2,
+    "mood_id": 6,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147588/Hippo_Blue_Tired.png"
+},
+{
+    "color_id": 3,
+    "species_id": 2,
+    "mood_id": 7,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147587/Hippo_Blue_Sleep.png"
+},
+{
+    "color_id": 3,
+    "species_id": 2,
+    "mood_id": 8,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147586/Hippo_Blue_Wake.png"
+},
+{
+    "color_id": 3,
+    "species_id": 2,
+    "mood_id": 9,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147585/Hippo_Blue_Dirty.png"
+},
+{
+    "color_id": 3,
+    "species_id": 2,
+    "mood_id": 10,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147591/Hippo_Blue_Cleaned.png"
+},
+{
+    "color_id": 3,
+    "species_id": 2,
+    "mood_id": 11,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147584/Hippo_Blue_Mad.png"
+},
+{
+    "color_id": 3,
+    "species_id": 2,
+    "mood_id": 12,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147585/Hippo_Blue_Sad.png"
+},
+{
+    "color_id": 3,
+    "species_id": 2,
+    "mood_id": 13,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147592/Hippo_Blue_Pet.png"
+},
+{
+    "color_id": 3,
+    "species_id": 2,
+    "mood_id": 14,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728148089/Hippo_Dead_zrmf4i.png"
+},
+
+{
+    "color_id": 4,
+    "species_id": 2,
+    "mood_id": 1,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728152619/Hippo_Green_Default.gif"
+},
+{
+    "color_id": 4,
+    "species_id": 2,
+    "mood_id": 2,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147593/Hippo_Green_Acknowledge.png"
+},
+{
+    "color_id": 4,
+    "species_id": 2,
+    "mood_id": 3,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147593/Hippo_Green_Happy.png"
+},
+{
+    "color_id": 4,
+    "species_id": 2,
+    "mood_id": 4,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728153925/Hippo_Green_Feeding.gif"
+},
+{
+    "color_id": 4,
+    "species_id": 2,
+    "mood_id": 5,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147589/Hippo_Green_Hungry.png"
+},
+{
+    "color_id": 4,
+    "species_id": 2,
+    "mood_id": 6,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147588/Hippo_Green_Tired.png"
+},
+{
+    "color_id": 4,
+    "species_id": 2,
+    "mood_id": 7,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147587/Hippo_Green_Sleep.png"
+},
+{
+    "color_id": 4,
+    "species_id": 2,
+    "mood_id": 8,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147586/Hippo_Green_Wake.png"
+},
+{
+    "color_id": 4,
+    "species_id": 2,
+    "mood_id": 9,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147585/Hippo_Green_Dirty.png"
+},
+{
+    "color_id": 4,
+    "species_id": 2,
+    "mood_id": 10,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147591/Hippo_Green_Cleaned.png"
+},
+{
+    "color_id": 4,
+    "species_id": 2,
+    "mood_id": 11,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147584/Hippo_Green_Mad.png"
+},
+{
+    "color_id": 4,
+    "species_id": 2,
+    "mood_id": 12,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147585/Hippo_Green_Sad.png"
+},
+{
+    "color_id": 4,
+    "species_id": 2,
+    "mood_id": 13,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147592/Hippo_Green_Pet.png"
+},
+{
+    "color_id": 4,
+    "species_id": 2,
+    "mood_id": 14,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728148089/Hippo_Dead_zrmf4i.png"
+},
+{
+    "color_id": 5,
+    "species_id": 2,
+    "mood_id": 1,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728152619/Hippo_Pink_Default.gif"
+},
+{
+    "color_id": 5,
+    "species_id": 2,
+    "mood_id": 2,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147593/Hippo_Pink_Acknowledge.png"
+},
+{
+    "color_id": 5,
+    "species_id": 2,
+    "mood_id": 3,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147593/Hippo_Pink_Happy.png"
+},
+{
+    "color_id": 5,
+    "species_id": 2,
+    "mood_id": 4,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728153925/Hippo_Pink_Feeding.gif"
+},
+{
+    "color_id": 5,
+    "species_id": 2,
+    "mood_id": 5,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147589/Hippo_Pink_Hungry.png"
+},
+{
+    "color_id": 5,
+    "species_id": 2,
+    "mood_id": 6,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147588/Hippo_Pink_Tired.png"
+},
+{
+    "color_id": 5,
+    "species_id": 2,
+    "mood_id": 7,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147587/Hippo_Pink_Sleep.png"
+},
+{
+    "color_id": 5,
+    "species_id": 2,
+    "mood_id": 8,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147586/Hippo_Pink_Wake.png"
+},
+{
+    "color_id": 5,
+    "species_id": 2,
+    "mood_id": 9,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147585/Hippo_Pink_Dirty.png"
+},
+{
+    "color_id": 5,
+    "species_id": 2,
+    "mood_id": 10,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147591/Hippo_Pink_Cleaned.png"
+},
+{
+    "color_id": 5,
+    "species_id": 2,
+    "mood_id": 11,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147584/Hippo_Pink_Mad.png"
+},
+{
+    "color_id": 5,
+    "species_id": 2,
+    "mood_id": 12,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147585/Hippo_Pink_Sad.png"
+},
+{
+    "color_id": 5,
+    "species_id": 2,
+    "mood_id": 13,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147592/Hippo_Pink_Pet.png"
+},
+{
+    "color_id": 5,
+    "species_id": 2,
+    "mood_id": 14,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728148089/Hippo_Dead_zrmf4i.png"
+},
+
+{
+    "color_id": 6,
+    "species_id": 2,
+    "mood_id": 1,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728152619/Hippo_Orange_Default.gif"
+},
+{
+    "color_id": 6,
+    "species_id": 2,
+    "mood_id": 2,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147593/Hippo_Orange_Acknowledge.png"
+},
+{
+    "color_id": 6,
+    "species_id": 2,
+    "mood_id": 3,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147593/Hippo_Orange_Happy.png"
+},
+{
+    "color_id": 6,
+    "species_id": 2,
+    "mood_id": 4,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728153925/Hippo_Orange_Feeding.gif"
+},
+{
+    "color_id": 6,
+    "species_id": 2,
+    "mood_id": 5,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147589/Hippo_Orange_Hungry.png"
+},
+{
+    "color_id": 6,
+    "species_id": 2,
+    "mood_id": 6,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147588/Hippo_Orange_Tired.png"
+},
+{
+    "color_id": 6,
+    "species_id": 2,
+    "mood_id": 7,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147587/Hippo_Orange_Sleep.png"
+},
+{
+    "color_id": 6,
+    "species_id": 2,
+    "mood_id": 8,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147586/Hippo_Orange_Wake.png"
+},
+{
+    "color_id": 6,
+    "species_id": 2,
+    "mood_id": 9,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147585/Hippo_Orange_Dirty.png"
+},
+{
+    "color_id": 6,
+    "species_id": 2,
+    "mood_id": 10,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147591/Hippo_Orange_Cleaned.png"
+},
+{
+    "color_id": 6,
+    "species_id": 2,
+    "mood_id": 11,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147584/Hippo_Orange_Mad.png"
+},
+{
+    "color_id": 6,
+    "species_id": 2,
+    "mood_id": 12,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147585/Hippo_Orange_Sad.png"
+},
+{
+    "color_id": 6,
+    "species_id": 2,
+    "mood_id": 13,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147592/Hippo_Orange_Pet.png"
+},
+{
+    "color_id": 6,
+    "species_id": 2,
+    "mood_id": 14,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728148089/Hippo_Dead_zrmf4i.png"
+},
+{
+    "color_id": 1,
+    "species_id": 3,
+    "mood_id": 1,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728523679/Vulture_Yellow_Neutral.gif"
+},
+{
+    "color_id": 1,
+    "species_id": 3,
+    "mood_id": 2,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147652/Vulture_Yellow_Acknowledge.png"
+},
+{
+    "color_id": 1,
+    "species_id": 3,
+    "mood_id": 3,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147652/Vulture_Yellow_Happy.png"
+},
+{
+    "color_id": 1,
+    "species_id": 3,
+    "mood_id": 4,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728523677/Vulture_Yellow_Feeding.gif"
+},
+{
+    "color_id": 1,
+    "species_id": 3,
+    "mood_id": 5,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147645/Vulture_Yellow_Hungry.png"
+},
+{
+    "color_id": 1,
+    "species_id": 3,
+    "mood_id": 6,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147645/Vulture_Yellow_Tired.png"
+},
+{
+    "color_id": 1,
+    "species_id": 3,
+    "mood_id": 7,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147651/Vulture_Yellow_Sleeping.png"
+},
+{
+    "color_id": 1,
+    "species_id": 3,
+    "mood_id": 8,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147650/Vulture_Yellow_Wake.png"
+},
+{
+    "color_id": 1,
+    "species_id": 3,
+    "mood_id": 9,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147644/Vulture_Yellow_Dirty.png"
+},
+{
+    "color_id": 1,
+    "species_id": 3,
+    "mood_id": 10,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147651/Vulture_Yellow_Cleaned.png"
+},
+{
+    "color_id": 1,
+    "species_id": 3,
+    "mood_id": 11,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147647/Vulture_Yellow_Mad.png"
+},
+{
+    "color_id": 1,
+    "species_id": 3,
+    "mood_id": 12,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147646/Vulture_Yellow_Sad.png"
+},
+{
+    "color_id": 1,
+    "species_id": 3,
+    "mood_id": 13,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147652/Vulture_Yellow_Pet.png"
+},
+{
+    "color_id": 1,
+    "species_id": 3,
+    "mood_id": 14,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147643/Vulture_Yellow_Dead.png"
+},
+
+{
+    "color_id": 2,
+    "species_id": 3,
+    "mood_id": 1,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728522238/Vulture_Red_Neutral.gif"
+},
+{
+    "color_id": 2,
+    "species_id": 3,
+    "mood_id": 2,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147663/Vulture_Red_Acknowledge.png"
+},
+{
+    "color_id": 2,
+    "species_id": 3,
+    "mood_id": 3,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147663/Vulture_Red_Happy.png"
+},
+{
+    "color_id": 2,
+    "species_id": 3,
+    "mood_id": 4,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728522454/Vulture_Red_Feeding.gif"
+},
+{
+    "color_id": 2,
+    "species_id": 3,
+    "mood_id": 5,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147655/Vulture_Red_Hungry.png"
+},
+{
+    "color_id": 2,
+    "species_id": 3,
+    "mood_id": 6,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147656/Vulture_Red_Tired.png"
+},
+{
+    "color_id": 2,
+    "species_id": 3,
+    "mood_id": 7,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147661/Vulture_Red_Sleeping.png"
+},
+{
+    "color_id": 2,
+    "species_id": 3,
+    "mood_id": 8,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147660/Vulture_Red_Wake.png"
+},
+{
+    "color_id": 2,
+    "species_id": 3,
+    "mood_id": 9,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147654/Vulture_Red_Dirty.png"
+},
+{
+    "color_id": 2,
+    "species_id": 3,
+    "mood_id": 10,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147662/Vulture_Red_Cleaned.png"
+},
+{
+    "color_id": 2,
+    "species_id": 3,
+    "mood_id": 11,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147657/Vulture_Red_Mad.png"
+},
+{
+    "color_id": 2,
+    "species_id": 3,
+    "mood_id": 12,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147657/Vulture_Red_Sad.png"
+},
+{
+    "color_id": 2,
+    "species_id": 3,
+    "mood_id": 13,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147663/Vulture_Red_Pet.png"
+},
+{
+    "color_id": 2,
+    "species_id": 3,
+    "mood_id": 14,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147643/Vulture_Red_Dead.png"
+},
+{
+    "color_id": 3,
+    "species_id": 3,
+    "mood_id": 1,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728522938/Vulture_Blue_Neutral.gif"
+},
+{
+    "color_id": 3,
+    "species_id": 3,
+    "mood_id": 2,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147689/Vulture_Blue_Acknowledge.png"
+},
+{
+    "color_id": 3,
+    "species_id": 3,
+    "mood_id": 3,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147689/Vulture_Blue_Happy.png"
+},
+{
+    "color_id": 3,
+    "species_id": 3,
+    "mood_id": 4,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728523021/Vulture_Blue_Feeding.gif"
+},
+{
+    "color_id": 3,
+    "species_id": 3,
+    "mood_id": 5,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147680/Vulture_Blue_Hungry.png"
+},
+{
+    "color_id": 3,
+    "species_id": 3,
+    "mood_id": 6,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147681/Vulture_Blue_Tired.png"
+},
+{
+    "color_id": 3,
+    "species_id": 3,
+    "mood_id": 7,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147686/Vulture_Blue_Sleeping.png"
+},
+{
+    "color_id": 3,
+    "species_id": 3,
+    "mood_id": 8,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147686/Vulture_Blue_Wake.png"
+},
+{
+    "color_id": 3,
+    "species_id": 3,
+    "mood_id": 9,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147679/Vulture_Blue_Dirty.png"
+},
+{
+    "color_id": 3,
+    "species_id": 3,
+    "mood_id": 10,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147688/Vulture_Blue_Cleaned.png"
+},
+{
+    "color_id": 3,
+    "species_id": 3,
+    "mood_id": 11,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147682/Vulture_Blue_Mad.png"
+},
+{
+    "color_id": 3,
+    "species_id": 3,
+    "mood_id": 12,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147682/Vulture_Blue_Sad.png"
+},
+{
+    "color_id": 3,
+    "species_id": 3,
+    "mood_id": 13,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147689/Vulture_Blue_Pet.png"
+},
+{
+    "color_id": 3,
+    "species_id": 3,
+    "mood_id": 14,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147643/Vulture_Blue_Dead.png"
+},
+
+{
+    "color_id": 4,
+    "species_id": 3,
+    "mood_id": 1,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728522692/Vulture_Green_Neutral.gif"
+},
+{
+    "color_id": 4,
+    "species_id": 3,
+    "mood_id": 2,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147676/Vulture_Green_Acknowledge.png"
+},
+{
+    "color_id": 4,
+    "species_id": 3,
+    "mood_id": 3,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147676/Vulture_Green_Happy.png"
+},
+{
+    "color_id": 4,
+    "species_id": 3,
+    "mood_id": 4,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728522715/Vulture_Green_Feeding.gif"
+},
+{
+    "color_id": 4,
+    "species_id": 3,
+    "mood_id": 5,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147666/Vulture_Green_Hungry.png"
+},
+{
+    "color_id": 4,
+    "species_id": 3,
+    "mood_id": 6,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147667/Vulture_Green_Tired.png"
+},
+{
+    "color_id": 4,
+    "species_id": 3,
+    "mood_id": 7,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147673/Vulture_Green_Sleeping.png"
+},
+{
+    "color_id": 4,
+    "species_id": 3,
+    "mood_id": 8,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147672/Vulture_Green_Wake.png"
+},
+{
+    "color_id": 4,
+    "species_id": 3,
+    "mood_id": 9,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147666/Vulture_Green_Dirty.png"
+},
+{
+    "color_id": 4,
+    "species_id": 3,
+    "mood_id": 10,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147674/Vulture_Green_Cleaned.png"
+},
+{
+    "color_id": 4,
+    "species_id": 3,
+    "mood_id": 11,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147670/Vulture_Green_Mad.png"
+},
+{
+    "color_id": 4,
+    "species_id": 3,
+    "mood_id": 12,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147669/Vulture_Green_Sad.png"
+},
+{
+    "color_id": 4,
+    "species_id": 3,
+    "mood_id": 13,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147676/Vulture_Green_Pet.png"
+},
+{
+    "color_id": 4,
+    "species_id": 3,
+    "mood_id": 14,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147643/Vulture_Green_Dead.png"
+},
+{
+    "color_id": 5,
+    "species_id": 3,
+    "mood_id": 1,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728521781/Vulture_Pink_Neutral.gif"
+},
+{
+    "color_id": 5,
+    "species_id": 3,
+    "mood_id": 2,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147702/Vulture_Pink_Acknowledge.png"
+},
+{
+    "color_id": 5,
+    "species_id": 3,
+    "mood_id": 3,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147702/Vulture_Pink_Happy.png"
+},
+{
+    "color_id": 5,
+    "species_id": 3,
+    "mood_id": 4,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728521928/Vulture_Pink_Feeding.gif"
+},
+{
+    "color_id": 5,
+    "species_id": 3,
+    "mood_id": 5,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147692/Vulture_Pink_Hungry.png"
+},
+{
+    "color_id": 5,
+    "species_id": 3,
+    "mood_id": 6,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147691/Vulture_Pink_Tired.png"
+},
+{
+    "color_id": 5,
+    "species_id": 3,
+    "mood_id": 7,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147701/Vulture_Pink_Sleeping.png"
+},
+{
+    "color_id": 5,
+    "species_id": 3,
+    "mood_id": 8,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147700/Vulture_Pink_Wake.png"
+},
+{
+    "color_id": 5,
+    "species_id": 3,
+    "mood_id": 9,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147695/Vulture_Pink_Dirty.png"
+},
+{
+    "color_id": 5,
+    "species_id": 3,
+    "mood_id": 10,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147701/Vulture_Pink_Cleaned.png"
+},
+{
+    "color_id": 5,
+    "species_id": 3,
+    "mood_id": 11,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147697/Vulture_Pink_Mad.png"
+},
+{
+    "color_id": 5,
+    "species_id": 3,
+    "mood_id": 12,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147695/Vulture_Pink_Sad.png"
+},
+{
+    "color_id": 5,
+    "species_id": 3,
+    "mood_id": 13,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147702/Vulture_Pink_Pet.png"
+},
+{
+    "color_id": 5,
+    "species_id": 3,
+    "mood_id": 14,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147643/Vulture_Pink_Dead.png"
+},
+
+{
+    "color_id": 6,
+    "species_id": 3,
+    "mood_id": 1,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728521593/Vulture_Orange_Neutral.gif"
+},
+{
+    "color_id": 6,
+    "species_id": 3,
+    "mood_id": 2,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147729/Vulture_Orange_Acknowledge.png"
+},
+{
+    "color_id": 6,
+    "species_id": 3,
+    "mood_id": 3,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147729/Vulture_Orange_Happy.png"
+},
+{
+    "color_id": 6,
+    "species_id": 3,
+    "mood_id": 4,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728521743/Vulture_Orange_Feeding.gif"
+},
+{
+    "color_id": 6,
+    "species_id": 3,
+    "mood_id": 5,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147718/Vulture_Orange_Hungry.png"
+},
+{
+    "color_id": 6,
+    "species_id": 3,
+    "mood_id": 6,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147718/Vulture_Orange_Tired.png"
+},
+{
+    "color_id": 6,
+    "species_id": 3,
+    "mood_id": 7,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147728/Vulture_Orange_Sleeping.png"
+},
+{
+    "color_id": 6,
+    "species_id": 3,
+    "mood_id": 8,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147727/Vulture_Orange_Wake.png"
+},
+{
+    "color_id": 6,
+    "species_id": 3,
+    "mood_id": 9,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147717/Vulture_Orange_Dirty.png"
+},
+{
+    "color_id": 6,
+    "species_id": 3,
+    "mood_id": 10,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147728/Vulture_Orange_Cleaned.png"
+},
+{
+    "color_id": 6,
+    "species_id": 3,
+    "mood_id": 11,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147723/Vulture_Orange_Mad.png"
+},
+{
+    "color_id": 6,
+    "species_id": 3,
+    "mood_id": 12,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147721/Vulture_Orange_Sad.png"
+},
+{
+    "color_id": 6,
+    "species_id": 3,
+    "mood_id": 13,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147729/Vulture_Orange_Pet.png"
+},
+{
+    "color_id": 6,
+    "species_id": 3,
+    "mood_id": 14,
+    "image_url": "https://res.cloudinary.com/deszclhtq/image/upload/v1728147643/Vulture_Orange_Dead.png"
+}
+
+],
+
+
+"users": [
+    {
+        "name": "Ash Ketchum",
+        "email": "ash@example.com",
+        "password": "password123",
+        "created_at": "CURRENT_TIMESTAMP"
+    },
+    {
+        "name": "Sorren Jao",
+        "email": "sorren@example.com",
+        "password": "password123",
+        "created_at": "CURRENT_TIMESTAMP"
+    },
+    {
+        "name": "Krisan Manoharan",
+        "email": "krisan@example.com",
+        "password": "password123",
+        "created_at": "CURRENT_TIMESTAMP"
+    }
+],
+"personalities": [
+    {
+        "id": 1,
+        "trait_name": "Energetic",
+        "energy_decay": 1,
+        "happiness_decay": 2,
+        "hunger_decay": 2,
+        "cleanliness_decay": 3
+    },
+    {
+        "id": 2,
+        "trait_name": "Lazy",
+        "energy_decay": 3,
+        "happiness_decay": 1,
+        "hunger_decay": 2,
+        "cleanliness_decay": 1
+    },
+    {
+        "id": 3,
+        "trait_name": "Playful",
+        "energy_decay": 2,
+        "happiness_decay": 1,
+        "hunger_decay": 3,
+        "cleanliness_decay": 2
+    }
+],
+"pets": [
+    {
+        "user_id": 1,
+        "species_id": 1,
+        "name": "Glurb",
+        "age": 5,
+        "adopted_at": "CURRENT_TIMESTAMP",
+        "sprite_id": 27,
+        "mood_id": 1,
+        "color_id": 3,
+        "personality_id": 2,
+        "update_time": "CURRENT_TIMESTAMP",
+        "energy": 100,
+        "happiness": 100,
+        "hunger": 100,
+        "cleanliness": 100
+    },
+    {
+        "user_id": 1,
+        "species_id": 2,
+        "name": "Big Bertha",
+        "age": 5,
+        "adopted_at": "CURRENT_TIMESTAMP",
+        "sprite_id": 127,
+        "mood_id": 1,
+        "color_id": 4,
+        "personality_id": 1,
+        "update_time": "CURRENT_TIMESTAMP",
+        "energy": 30,
+        "happiness": 30,
+        "hunger": 30,
+        "cleanliness": 30
+    }
+],
+"shop": [
+    {
+        "id": 1,
+        "name": "Main Shop",
+        "created_at": "CURRENT_TIMESTAMP"
+    },
+    {
+        "id": 2,
+        "name": "Luxury Shop",
+        "created_at": "CURRENT_TIMESTAMP"
+    }
+],
+"toys": [
+    {
+        "name": "Doll",
+        "price": 100,
+        "effects": 50,
+        "description": "Sometimes your pet needs a friend!",
+        "shop_id": 1,
+        "toy_image": "https://res.cloudinary.com/deszclhtq/image/upload/v1727812841/toy_doll.png"
+    },
+    {
+        "name": "Ball",
+        "price": 50,
+        "effects": 25,
+        "description": "Round and bouncy… Just don’t pop it",
+        "shop_id": 1,
+        "toy_image": "https://res.cloudinary.com/deszclhtq/image/upload/v1727812841/toy_ball.png"
+    },
+    {
+        "name": "iPad",
+        "price": 1000,
+        "effects": 100,
+        "description": "The new babysitter",
+        "shop_id": 1,
+        "toy_image": "https://res.cloudinary.com/deszclhtq/image/upload/v1727812767/toy_ipad.png"
+    },
+    {
+        "name": "Paint Set",
+        "price": 150,
+        "effects": 60,
+        "description": "It may get on your walls",
+        "shop_id": 1,
+        "toy_image": "https://res.cloudinary.com/deszclhtq/image/upload/v1727812842/toy_paint_set.png"
+    },
+    {
+        "name": "Yoyo",
+        "price": 60,
+        "effects": 30,
+        "description": "Walk your pet",
+        "shop_id": 1,
+        "toy_image": "https://res.cloudinary.com/deszclhtq/image/upload/v1727812845/toy_yoyo.png"
+    },
+    {
+        "name": "Rubber Ducky",
+        "price": 40,
+        "effects": 20,
+        "description": "If it quacks like a duck",
+        "shop_id": 1,
+        "toy_image": "https://res.cloudinary.com/deszclhtq/image/upload/v1727812843/toy_rubber_ducky.png"
+    }
+],
+
+"toiletries": [
+    {
+        "name": "Soap",
+        "price": 25,
+        "effects": 5,
+        "description": "Don’t drop the soap!",
+        "shop_id": 1,
+        "toiletry_image": "https://res.cloudinary.com/deszclhtq/image/upload/v1727812844/toiletry_soap.png"
+    },
+    {
+        "name": "Hairbrush",
+        "price": 50,
+        "effects": 35,
+        "description": "Even works on bald pets!",
+        "shop_id": 1,
+        "toiletry_image": "https://res.cloudinary.com/deszclhtq/image/upload/v1727812786/toiletry_hairbrush.png"
+    },
+    {
+        "name": "Toilet Paper",
+        "price": 25,
+        "effects": 5,
+        "description": "For those hard to clean messes",
+        "shop_id": 1,
+        "toiletry_image": "https://res.cloudinary.com/deszclhtq/image/upload/v1727812883/toiletry_toilet_paper.png"
+    },
+    {
+        "name": "Toothbrush",
+        "price": 40,
+        "effects": 30,
+        "description": "Make your smile shine",
+        "shop_id": 1,
+        "toiletry_image": "https://res.cloudinary.com/deszclhtq/image/upload/v1727812895/toiletry_toothbrush.png"
+    }
+],
+"foods": [
+    {
+        "name": "Rotting Banana",
+        "price": 5,
+        "effects": 5,
+        "food_type": 2,
+        "description": "You must really hate your pet…",
+        "shop_id": 1,
+        "food_image": "https://res.cloudinary.com/deszclhtq/image/upload/v1727812846/food_rotting_banana.png"
+    },
+    {
+        "name": "Salad",
+        "price": 15,
+        "effects": 10,
+        "food_type": 2,
+        "description": "I always enjoy tossing salad",
+        "shop_id": 1,
+        "food_image": "https://res.cloudinary.com/deszclhtq/image/upload/v1727812885/food_salad.png"
+    },
+    {
+        "name": "Can of Beans",
+        "price": 15,
+        "effects": 15,
+        "food_type": 2,
+        "description": "You have to bean there",
+        "shop_id": 1,
+        "food_image": "https://res.cloudinary.com/deszclhtq/image/upload/v1727812838/food_can_of_beans.png"
+    },
+    {
+        "name": "Chicken Leg",
+        "price": 15,
+        "effects": 15,
+        "food_type": 3,
+        "description": "This chicken didn’t make it across the road",
+        "shop_id": 1,
+        "food_image": "https://res.cloudinary.com/deszclhtq/image/upload/v1727812803/food_chicken_leg.png"
+    },
+    {
+        "name": "Sushi",
+        "price": 30,
+        "effects": 20,
+        "food_type": 3,
+        "description": "Prepared by the finest",
+        "shop_id": 1,
+        "food_image": "https://res.cloudinary.com/deszclhtq/image/upload/v1727812888/food_sushi.png"
+    },
+    {
+        "name": "Blueberry Pie",
+        "price": 30,
+        "effects": 20,
+        "food_type": 2,
+        "description": "Just a cherry pie painted blue",
+        "shop_id": 1,
+        "food_image": "https://res.cloudinary.com/deszclhtq/image/upload/v1727812879/food_pie.png"
+    },
+    {
+        "name": "Hamburger",
+        "price": 35,
+        "effects": 25,
+        "food_type": 3,
+        "description": "Nothing fast about this burger",
+        "shop_id": 1,
+        "food_image": "https://res.cloudinary.com/deszclhtq/image/upload/v1727812784/food_hamburger.png"
+    }
+],
+"inventory": [
+    {
+        "user_id": 1,
+        "money": 800.0
+    }
+],
+"user_toys_table": {
+    "fields": [
+        { "name": "id", "type": "SERIAL", "primary_key": true },
+        { "name": "created_at", "type": "TIMESTAMP", "default": "CURRENT_TIMESTAMP" },
+        { "name": "count", "type": "INTEGER", "default": 0 },
+        { "name": "user_id", "type": "INTEGER", "references": "users(id)", "on_delete": "CASCADE" },
+        { "name": "inventory_id", "type": "INTEGER", "references": "inventory(id)", "on_delete": "CASCADE" },
+        { "name": "item_type_id", "type": "INTEGER", "references": "toys(id)", "on_delete": "CASCADE" }
+    ]
+},
+"user_toy_count_view": {
+    "description": "A view to calculate toy counts dynamically",
+    "fields": [
+        { "name": "user_id", "type": "INTEGER" },
+        { "name": "inventory_id", "type": "INTEGER" },
+        { "name": "toy_count", "type": "INTEGER", "calculated_as": "SUM(count)" }
+    ],
+    "group_by": ["user_id", "inventory_id", "item_type_id"]
+},
+"user_toys_data": [
+    {
+        "count": 99,
+        "user_id": 1,
+        "inventory_id": 1,
+        "item_type_name": "Doll"
+    },
+    {
+        "count": 99,
+        "user_id": 1,
+        "inventory_id": 1,
+        "item_type_name": "Ball"
+    },
+    {
+        "count": 1,
+        "user_id": 1,
+        "inventory_id": 1,
+        "item_type_name": "Yoyo"
+    }
+],
+
+"user_toiletries_table": {
+    "fields": [
+        { "name": "id", "type": "SERIAL", "primary_key": true },
+        { "name": "created_at", "type": "TIMESTAMP", "default": "CURRENT_TIMESTAMP" },
+        { "name": "count", "type": "INTEGER", "default": 0 },
+        { "name": "user_id", "type": "INTEGER", "references": "users(id)", "on_delete": "CASCADE" },
+        { "name": "inventory_id", "type": "INTEGER", "references": "inventory(id)", "on_delete": "CASCADE" },
+        { "name": "item_type_id", "type": "INTEGER", "references": "toiletries(id)", "on_delete": "CASCADE" }
+    ]
+},
+"user_toiletries_count_view": {
+    "description": "A view to calculate toiletry counts dynamically",
+    "fields": [
+        { "name": "user_id", "type": "INTEGER" },
+        { "name": "inventory_id", "type": "INTEGER" },
+        { "name": "toiletry_count", "type": "INTEGER", "calculated_as": "SUM(count)" }
+    ],
+    "group_by": ["user_id", "inventory_id", "item_type_id"]
+},
+"user_toiletries_data": [
+    {
+        "count": 99,
+        "user_id": 1,
+        "inventory_id": 1,
+        "item_type_name": "Soap"
+    },
+    {
+        "count": 99,
+        "user_id": 1,
+        "inventory_id": 1,
+        "item_type_name": "Hairbrush"
+    },
+    {
+        "count": 99,
+        "user_id": 1,
+        "inventory_id": 1,
+        "item_type_name": "Toilet Paper"
+    }
+],
+"user_foods_table": {
+    "fields": [
+        { "name": "id", "type": "SERIAL", "primary_key": true },
+        { "name": "created_at", "type": "TIMESTAMP", "default": "CURRENT_TIMESTAMP" },
+        { "name": "count", "type": "INTEGER", "default": 0 },
+        { "name": "user_id", "type": "INTEGER", "references": "users(id)", "on_delete": "CASCADE" },
+        { "name": "inventory_id", "type": "INTEGER", "references": "inventory(id)", "on_delete": "CASCADE" },
+        { "name": "item_type_id", "type": "INTEGER", "references": "foods(id)", "on_delete": "CASCADE" }
+    ]
+},
+"user_food_count_view": {
+    "description": "A view to calculate food counts dynamically",
+    "fields": [
+        { "name": "user_id", "type": "INTEGER" },
+        { "name": "inventory_id", "type": "INTEGER" },
+        { "name": "food_count", "type": "INTEGER", "calculated_as": "SUM(count)" }
+    ],
+    "group_by": ["user_id", "inventory_id", "item_type_id"]
+},
+"user_foods": [
+    {
+        "count": 99,
+        "user_id": 1,
+        "inventory_id": 1,
+        "item_type_id": "(SELECT id FROM foods WHERE name = 'Rotting Banana')"
+    },
+    {
+        "count": 99,
+        "user_id": 1,
+        "inventory_id": 1,
+        "item_type_id": "(SELECT id FROM foods WHERE name = 'Salad')"
+    },
+    {
+        "count": 99,
+        "user_id": 1,
+        "inventory_id": 1,
+        "item_type_id": "(SELECT id FROM foods WHERE name = 'Can of Beans')"
+    }
+]
+}
+
+
+
+
