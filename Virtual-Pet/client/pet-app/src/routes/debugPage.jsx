@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 const DebugPage = () => {
   const [apiResults, setApiResults] = useState({});
+  const [databaseData, setDatabaseData] = useState(null);
   const [error, setError] = useState(null);
 
   const apiEndpoints = [
@@ -34,6 +35,20 @@ const DebugPage = () => {
     }
   };
 
+  const fetchDatabase = async () => {
+    try {
+      setError(null);
+      const response = await fetch("/api/database");
+      if (!response.ok) {
+        throw new Error(`Error fetching database: ${response.status}`);
+      }
+      const data = await response.json();
+      setDatabaseData(data);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   const renderApiResults = () => {
     return Object.keys(apiResults).map((route) => (
       <div key={route} style={{ marginBottom: "20px" }}>
@@ -43,21 +58,20 @@ const DebugPage = () => {
     ));
   };
 
-  const adoptPet = async () => {
-    try {
-      const payload = { species_id: "123", color_id: "456" };
-      const response = await fetch("/api/adopt-pet", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const data = await response.json();
-      console.log(data);
-    } catch (err) {
-      console.error("Error adopting pet:", err);
-    }
+  const renderDatabaseData = () => {
+    if (!databaseData) return null;
+    return (
+      <div>
+        <h2>MongoDB Database</h2>
+        {Object.keys(databaseData).map((collection) => (
+          <div key={collection} style={{ marginBottom: "20px" }}>
+            <h4>Collection: {collection}</h4>
+            <pre>{JSON.stringify(databaseData[collection], null, 2)}</pre>
+          </div>
+        ))}
+      </div>
+    );
   };
-  
 
   return (
     <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
@@ -74,20 +88,27 @@ const DebugPage = () => {
         </button>
       ))}
 
+      <button
+        style={{ margin: "5px", padding: "10px 15px", backgroundColor: "#007BFF", color: "#fff" }}
+        onClick={fetchDatabase}
+      >
+        Fetch Entire Database
+      </button>
+
       {error && <p style={{ color: "red" }}>Error: {error}</p>}
 
       <h2>API Responses</h2>
       {renderApiResults()}
 
+      {renderDatabaseData()}
+
       <h2>Instructions</h2>
       <ol>
         <li>Click on a button to test the corresponding API endpoint.</li>
         <li>View the response data or error message below.</li>
+        <li>Click "Fetch Entire Database" to see all collections and documents.</li>
         <li>Check the console for detailed logs if needed.</li>
       </ol>
-    
-      <button onClick={adoptPet}>Test Adopt Pet</button>
-
     </div>
   );
 };
