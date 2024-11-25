@@ -13,13 +13,13 @@ router.post('/', async (req, res) => {
 
     try {
         // Step 1: Fix any pets with NULL cleanliness by setting them to 100
-        await db.collection('pets').updateOne(
+        await db.collection('all').updateOne(
             { _id: petId, cleanliness: { $exists: false } },
             { $set: { cleanliness: 100 } }
         );
 
         // Step 2: Fetch the toiletry's effect and the pet's current cleanliness
-        const toiletryResult = await db.collection('user_toiletries')
+        const toiletryResult = await db.collection('all')
             .aggregate([
                 { $match: { userId, _id: toiletriesId } },
                 {
@@ -68,13 +68,13 @@ router.post('/', async (req, res) => {
         // Step 3: Update the pet's cleanliness
         const newCleanliness = Math.min(cleanliness + effect, 200); // Cap cleanliness at 200
 
-        await db.collection('pets').updateOne(
+        await db.collection('all').updateOne(
             { _id: petId },
             { $set: { cleanliness: newCleanliness } }
         );
 
         // Step 4: Decrease the toiletries count for the user
-        await db.collection('user_toiletries').updateOne(
+        await db.collection('all').updateOne(
             { userId, _id: toiletriesId },
             { $inc: { count: -1 } }
         );

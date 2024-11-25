@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
         }
 
         // Update the user's money in the inventory
-        const updateResult = await db.collection('inventory').findOneAndUpdate(
+        const updateResult = await db.collection('all').findOneAndUpdate(
             { userId: new ObjectId(userId) },
             { $inc: { money: moneyEarned } }, // Increment money by the earned amount
             { returnDocument: 'after' } // Return the updated document

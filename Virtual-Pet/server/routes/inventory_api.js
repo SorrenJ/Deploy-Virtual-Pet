@@ -13,19 +13,19 @@ router.get('/', async (req, res) => {
         const userId = 1; // Hardcoded user ID for now (replace with session-based ID if needed)
 
         // Fetch inventory
-        const inventory = await db.collection('inventory').find({ userId }).toArray();
+        const inventory = await db.collection('all').find({ userId }).toArray();
 
         // Fetch counts from separate collections
-        const userFoodCount = await db.collection('user_food_counts').findOne({ userId });
-        const userToiletriesCount = await db.collection('user_toiletries_counts').findOne({ userId });
-        const userToysCount = await db.collection('user_toy_counts').findOne({ userId });
+        const userFoodCount = await db.collection('all').findOne({ userId });
+        const userToiletriesCount = await db.collection('all').findOne({ userId });
+        const userToysCount = await db.collection('all').findOne({ userId });
 
         const foodCount = userFoodCount?.count || 0;
         const toiletriesCount = userToiletriesCount?.count || 0;
         const toysCount = userToysCount?.count || 0;
 
         // Fetch user food details
-        const userFood = await db.collection('user_foods')
+        const userFood = await db.collection('all')
             .aggregate([
                 { $match: { userId } },
                 {
@@ -51,7 +51,7 @@ router.get('/', async (req, res) => {
             .toArray();
 
         // Fetch user toiletries details
-        const userToiletries = await db.collection('user_toiletries')
+        const userToiletries = await db.collection('all')
             .aggregate([
                 { $match: { userId } },
                 {
@@ -77,7 +77,7 @@ router.get('/', async (req, res) => {
             .toArray();
 
         // Fetch user toys details
-        const userToys = await db.collection('user_toys')
+        const userToys = await db.collection('all')
             .aggregate([
                 { $match: { userId } },
                 {

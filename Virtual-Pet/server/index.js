@@ -18,7 +18,7 @@ const main = async () => {
     const db = await connectToMongoDatabase();
 
     // Example: Fetch all documents from the 'foods' collection
-    const all = await db.collection('all').find().toArray();
+    const all = await db.collection('allall').find().toArray();
     console.log("All:", all);
 };
 
@@ -29,10 +29,9 @@ main().catch(console.error);
 
 // Middleware
 
-const allowedOrigins = [
-  'http://localhost:3000', // Local development
-  'https://virtual-pet-frontend-y0c7.onrender.com' // Deployed frontend
-];
+const allowedOrigins = process.env.NODE_ENV === 'production'
+  ? ['https://virtual-pet-frontend-y0c7.onrender.com']
+  : ['http://localhost:3000'];
 
 app.use(cors({
   origin: function (origin, callback) {
@@ -131,10 +130,10 @@ app.post('/api/adopt-pet', async (req, res) => {
 
     try {
         // Fetch the appropriate sprite_id based on the selected species_id, mood, and color
-        const sprite = await db.collection('sprites').findOne({
+        const sprite = await db.collection('all').findOne({
             species_id: species_id,
             color_id: color_id,
-            mood_id: await db.collection('moods').findOne({ mood_name: 'default' }).then((mood) => mood?._id),
+            mood_id: await db.collection('all').findOne({ mood_name: 'default' }).then((mood) => mood?._id),
         });
 
         if (!sprite) {
@@ -151,9 +150,9 @@ app.post('/api/adopt-pet', async (req, res) => {
             age: 1, // Hardcoded age
             adopted_at: new Date(), // Current timestamp
             sprite_id: sprite_id,
-            mood_id: await db.collection('moods').findOne({ mood_name: 'default' }).then((mood) => mood?._id),
+            mood_id: await db.collection('all').findOne({ mood_name: 'default' }).then((mood) => mood?._id),
             color_id: color_id,
-            personality_id: await db.collection('personalities').findOne({ personality_name: 'Gloomy' }).then((personality) => personality?._id),
+            personality_id: await db.collection('all').findOne({ personality_name: 'Gloomy' }).then((personality) => personality?._id),
             update_time: new Date(),
             energy: 100,
             happiness: 100,
@@ -161,7 +160,7 @@ app.post('/api/adopt-pet', async (req, res) => {
             cleanliness: 100,
         };
 
-        const result = await db.collection('pets').insertOne(newPet);
+        const result = await db.collection('all').insertOne(newPet);
 
         res.status(201).json(result.ops[0]); // Send the newly created pet back to the client
     } catch (err) {
@@ -180,10 +179,10 @@ app.post('/api/adopt-pet', async (req, res) => {
 
     try {
         // Fetch the appropriate sprite_id based on the selected species_id, mood, and color
-        const sprite = await db.collection('sprites').findOne({
+        const sprite = await db.collection('all').findOne({
             species_id: species_id,
             color_id: color_id,
-            mood_id: await db.collection('moods').findOne({ mood_name: 'default' }).then((mood) => mood?._id),
+            mood_id: await db.collection('all').findOne({ mood_name: 'default' }).then((mood) => mood?._id),
         });
 
         if (!sprite) {
@@ -200,9 +199,9 @@ app.post('/api/adopt-pet', async (req, res) => {
             age: 1, // Hardcoded age
             adopted_at: new Date(), // Current timestamp
             sprite_id: sprite_id,
-            mood_id: await db.collection('moods').findOne({ mood_name: 'default' }).then((mood) => mood?._id),
+            mood_id: await db.collection('all').findOne({ mood_name: 'default' }).then((mood) => mood?._id),
             color_id: color_id,
-            personality_id: await db.collection('personalities').findOne({ personality_name: 'Gloomy' }).then((personality) => personality?._id),
+            personality_id: await db.collection('all').findOne({ personality_name: 'Gloomy' }).then((personality) => personality?._id),
             update_time: new Date(),
             energy: 100,
             happiness: 100,
@@ -210,7 +209,7 @@ app.post('/api/adopt-pet', async (req, res) => {
             cleanliness: 100,
         };
 
-        const result = await db.collection('pets').insertOne(newPet);
+        const result = await db.collection('all').insertOne(newPet);
 
         res.status(201).json(result.ops[0]); // Send the newly created pet back to the client
     } catch (err) {
@@ -228,7 +227,7 @@ app.post('/api/set-pet-name', async (req, res) => {
       const db = await connectToMongoDatabase();
   
       // Update the pet's name based on pet_id
-      const result = await db.collection('pets').findOneAndUpdate(
+      const result = await db.collection('all').findOneAndUpdate(
         { _id: pet_id },
         { $set: { name, update_time: new Date() } },
         { returnDocument: 'after' } // Return the updated document
@@ -250,10 +249,10 @@ app.post('/api/set-pet-name', async (req, res) => {
       const db = await connectToMongoDatabase();
   
       // Fetch all toys, toiletries, foods, and user's money
-      const toys = await db.collection('toys').find().toArray();
-      const toiletries = await db.collection('toiletries').find().toArray();
-      const foods = await db.collection('foods').find().toArray();
-      const inventory = await db.collection('inventory').findOne({ user_id: 1 }); // Replace 1 with actual user ID
+      const toys = await db.collection('all').find().toArray();
+      const toiletries = await db.collection('all').find().toArray();
+      const foods = await db.collection('all').find().toArray();
+      const inventory = await db.collection('all').findOne({ user_id: 1 }); // Replace 1 with actual user ID
   
       const money = inventory?.money || 0;
   
@@ -281,14 +280,14 @@ app.post('/buy', async (req, res) => {
       const totalCost = item.price * itemCount;
   
       // Fetch user's current money
-      const inventory = await db.collection('inventory').findOne({ user_id: userId });
+      const inventory = await db.collection('all').findOne({ user_id: userId });
   
       if (!inventory || inventory.money < totalCost) {
         return res.status(400).json({ error: 'Not enough money' });
       }
   
       // Deduct money from inventory
-      await db.collection('inventory').updateOne(
+      await db.collection('all').updateOne(
         { user_id: userId },
         { $inc: { money: -totalCost } }
       );
@@ -333,7 +332,7 @@ app.post('/add-money', async (req, res) => {
       const db = await connectToMongoDatabase();
   
       // Update user's money in the inventory
-      const result = await db.collection('inventory').updateOne(
+      const result = await db.collection('all').updateOne(
         { user_id: userId },
         { $inc: { money: amount } }
       );
@@ -356,22 +355,22 @@ app.get('/all_tables', async (req, res) => {
       const db = await connectToMongoDatabase();
   
       // Fetch all data from collections
-      const species = await db.collection('species').find().toArray();
-      const users = await db.collection('users').find().toArray();
-      const pets = await db.collection('pets').find().toArray();
-      const moods = await db.collection('moods').find().toArray();
-      const sprites = await db.collection('sprites').find().toArray(); // Fetch sprites data
-      const colors = await db.collection('colors').find().toArray();
-      const personalities = await db.collection('personalities').find().toArray(); // Fetch personalities data
+      const species = await db.collection('allspecies').find().toArray();
+      const users = await db.collection('allusers').find().toArray();
+      const pets = await db.collection('allpets').find().toArray();
+      const moods = await db.collection('allmoods').find().toArray();
+      const sprites = await db.collection('allsprites').find().toArray(); // Fetch sprites data
+      const colors = await db.collection('allcolors').find().toArray();
+      const personalities = await db.collection('allpersonalities').find().toArray(); // Fetch personalities data
   
-      const inventory = await db.collection('inventory').find().toArray();
-      const userFood = await db.collection('user_foods').find().toArray();
-      const userToiletries = await db.collection('user_toiletries').find().toArray();
-      const userToys = await db.collection('user_toys').find().toArray();
-      const shop = await db.collection('shop').find().toArray();
-      const toys = await db.collection('toys').find().toArray();
-      const toiletries = await db.collection('toiletries').find().toArray();
-      const foods = await db.collection('foods').find().toArray();
+      const inventory = await db.collection('allinventory').find().toArray();
+      const userFood = await db.collection('alluser_foods').find().toArray();
+      const userToiletries = await db.collection('alluser_toiletries').find().toArray();
+      const userToys = await db.collection('alluser_toys').find().toArray();
+      const shop = await db.collection('allshop').find().toArray();
+      const toys = await db.collection('alltoys').find().toArray();
+      const toiletries = await db.collection('alltoiletries').find().toArray();
+      const foods = await db.collection('allfoods').find().toArray();
   
       // Render the EJS template and pass all the data to the template
       res.render('all_tables', {

@@ -6,19 +6,19 @@ const DebugPage = () => {
   const [error, setError] = useState(null);
 
   const apiEndpoints = [
-    { name: "Convert Score", route: "/api/convert-score" },
-    { name: "Pets", route: "/api/pets" },
-    { name: "Species", route: "/api/species" },
-    { name: "User Pets", route: "/api/user-pets" },
-    { name: "Home", route: "/api/home" },
-    { name: "Clean Pet", route: "/api/clean-pet" },
-    { name: "Feed Pet", route: "/api/feed-pet" },
-    { name: "Play with Pet", route: "/api/play-with-pet" },
-    { name: "Inventory", route: "/api/inventory" },
-    { name: "Pets Stats", route: "/api/pets-stats" },
-    { name: "Species Sprite", route: "/api/species/sprite" },
-    { name: "Sleep Pet", route: "/api/sleep-pet" },
-    { name: "Delete Pet", route: "/api/delete-pet" },
+    { name: "Convert Score", route: "http://localhost:5000/api/convert-score" },
+    { name: "Pets", route: "http://localhost:5000/api/pets" },
+    { name: "Species", route: "http://localhost:5000/api/species" },
+    { name: "User Pets", route: "http://localhost:5000/api/user-pets" },
+    { name: "Home", route: "http://localhost:5000/api/home" },
+    { name: "Clean Pet", route: "http://localhost:5000/api/clean-pet" },
+    { name: "Feed Pet", route: "http://localhost:5000/api/feed-pet" },
+    { name: "Play with Pet", route: "http://localhost:5000/api/play-with-pet" },
+    { name: "Inventory", route: "http://localhost:5000/api/inventory" },
+    { name: "Pets Stats", route: "http://localhost:5000/api/pets-stats" },
+    { name: "Species Sprite", route: "http://localhost:5000/api/species/sprite" },
+    { name: "Sleep Pet", route: "http://localhost:5000/api/sleep-pet" },
+    { name: "Delete Pet", route: "http://localhost:5000/api/delete-pet" },
   ];
 
   const fetchData = async (route) => {

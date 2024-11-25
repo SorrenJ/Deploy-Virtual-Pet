@@ -1,17 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const connectToMongoDatabase = require("../db/mongoConnection"); // MongoDB connection utility
+const connectToMongoDatabase = require("../db/mongoConnection");
 
-router.use(bodyParser.json());
-router.use(cors());
+router.use(express.json());
 
-// Route to fetch all pets by user ID
+// Fetch all pets for a user
 router.get("/:userId", async (req, res) => {
   const { userId } = req.params;
 
-  // Validate userId
   if (!userId) {
     return res.status(400).json({ error: "Invalid or missing user ID" });
   }
@@ -19,82 +15,96 @@ router.get("/:userId", async (req, res) => {
   try {
     const db = await connectToMongoDatabase();
 
-    // Fetch pets for the given userId
-    const pets = await db
-      .collection("pets")
-      .aggregate([
-        { $match: { user_id: parseInt(userId) } },
-        {
-          $lookup: {
-            from: "sprites",
-            localField: "sprite_id",
-            foreignField: "_id",
-            as: "sprite_info",
-          },
-        },
-        {
-          $lookup: {
-            from: "colors",
-            localField: "color_id",
-            foreignField: "_id",
-            as: "color_info",
-          },
-        },
-        {
-          $project: {
-            id: 1,
-            name: 1,
-            pet_image_url: { $arrayElemAt: ["$sprite_info.image_url", 0] },
-            color_name: { $arrayElemAt: ["$color_info.color_name", 0] },
-            mood_id: 1,
-          },
-        },
-      ])
-      .toArray();
+    // Fetch the `all` document
+    const allDocument = await db.collection("all").findOne({});
+    if (!allDocument || !allDocument.pets) {
+      return res.status(404).json({ error: "No pets found in the collection" });
+    }
 
-    if (pets.length === 0) {
+    // Filter pets by `user_id`
+    const userPets = allDocument.pets.filter((pet) => pet.user_id === parseInt(userId, 10));
+    if (!userPets.length) {
       return res.status(404).json({ error: "No pets found for this user" });
     }
 
-    res.json(pets);
+    // Enrich pets with related details
+    const enrichedPets = userPets.map((pet) => {
+      const species = allDocument.species.find((sp) => sp.id === pet.species_id);
+      const color = allDocument.colors.find((col) => col.color_id === pet.color_id);
+      const mood = allDocument.moods.find((md) => md.mood_name === "default"); // Default mood
+
+      return {
+        id: pet.id,
+        name: pet.name,
+        species_name: species ? species.species_name : "Unknown",
+        color_name: color ? color.color_name : "Unknown",
+        mood_name: mood ? mood.mood_name : "default",
+        energy: pet.energy,
+        happiness: pet.happiness,
+        hunger: pet.hunger,
+        cleanliness: pet.cleanliness,
+      };
+    });
+
+    res.status(200).json(enrichedPets);
   } catch (error) {
-    console.error("Error fetching pets:", error);
+    console.error("Error fetching user pets:", error);
     res.status(500).json({ error: "Server error" });
   }
 });
 
-// Route to update a specific pet's image based on mood
+// Update pet image and mood
 router.put("/update-image/:userId/:petId", async (req, res) => {
   const { userId, petId } = req.params;
   const { mood_id } = req.body;
 
+  if (!mood_id || typeof mood_id !== "number") {
+    return res.status(400).json({ error: "Invalid or missing mood_id" });
+  }
+
   try {
     const db = await connectToMongoDatabase();
 
-    // Find the new sprite_id based on mood and color
-    const pet = await db.collection("pets").findOne({ _id: parseInt(petId), user_id: parseInt(userId) });
-    if (!pet) {
+    // Fetch the `all` document
+    const allDocument = await db.collection("all").findOne({});
+    if (!allDocument || !allDocument.pets) {
+      return res.status(404).json({ error: "No pets found in the collection" });
+    }
+
+    // Find the pet by `id` and `user_id`
+    const petIndex = allDocument.pets.findIndex(
+      (pet) => pet.id === parseInt(petId, 10) && pet.user_id === parseInt(userId, 10)
+    );
+
+    if (petIndex === -1) {
       return res.status(404).json({ error: "Pet not found" });
     }
 
-    const newSprite = await db.collection("sprites").findOne({
-      species_id: pet.species_id,
-      color_id: pet.color_id,
-      mood_id: mood_id,
-    });
+    const pet = allDocument.pets[petIndex];
 
-    if (!newSprite) {
-      return res.status(404).json({ error: "Matching sprite not found for the mood" });
-    }
-
-    // Update the pet's mood_id and sprite_id
-    await db.collection("pets").updateOne(
-      { _id: parseInt(petId), user_id: parseInt(userId) },
-      { $set: { mood_id: mood_id, sprite_id: newSprite._id } }
+    // Find sprite for the new mood
+    const newSprite = allDocument.sprites.find(
+      (sprite) =>
+        sprite.species_id === pet.species_id &&
+        sprite.color_id === pet.color_id &&
+        sprite.mood_id === mood_id
     );
 
-    // Return the updated pet's image URL
-    res.json({ pet_image_url: newSprite.image_url });
+    if (!newSprite) {
+      return res.status(404).json({ error: "Sprite not found for this mood" });
+    }
+
+    // Update pet's mood_id and sprite_id
+    allDocument.pets[petIndex] = {
+      ...pet,
+      mood_id,
+      sprite_id: newSprite.sprite_id,
+    };
+
+    // Simulate saving the updated document
+    await db.collection("all").replaceOne({}, allDocument);
+
+    res.status(200).json({ pet_image_url: newSprite.image_url });
   } catch (error) {
     console.error("Error updating pet mood and sprite:", error);
     res.status(500).json({ error: "Failed to update pet mood and sprite" });

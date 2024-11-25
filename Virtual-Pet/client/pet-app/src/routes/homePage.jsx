@@ -124,7 +124,7 @@ const HomePage = () => {
 
   const feedPet = async (petId, foodId) => {
     try {
-      const response = await fetch('http://localhost:5000/api/feed-pet', {
+      const response = await fetch('/api/feed-pet', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ petId, foodId }),
@@ -144,7 +144,7 @@ const HomePage = () => {
   
   const cleanPet = async (petId, toiletriesId) => {
     try {
-      const response = await fetch('http://localhost:5000/api/clean-pet', {
+      const response = await fetch('/api/clean-pet', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ petId, toiletriesId }),
@@ -164,7 +164,7 @@ const HomePage = () => {
   
   const playWithPet = async (petId, toyId) => {
     try {
-      const response = await fetch('http://localhost:5000/api/play-with-pet', {
+      const response = await fetch('/api/play-with-pet', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ petId, toyId }),

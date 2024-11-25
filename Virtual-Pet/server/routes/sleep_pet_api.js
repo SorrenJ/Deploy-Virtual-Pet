@@ -14,7 +14,7 @@ router.patch('/:petId', async (req, res) => {
         }
 
         // Fetch the current pet stats
-        const pet = await db.collection('pets').findOne({ _id: new ObjectId(petId) });
+        const pet = await db.collection('all').findOne({ _id: new ObjectId(petId) });
 
         if (!pet) {
             return res.status(404).json({ error: 'Pet not found' });
@@ -24,7 +24,7 @@ router.patch('/:petId', async (req, res) => {
         const newEnergy = Math.max(0, (pet.energy || 0) + amount); // Ensure energy doesn't go below 0
 
         // Update the pet's energy in the database
-        const result = await db.collection('pets').findOneAndUpdate(
+        const result = await db.collection('all').findOneAndUpdate(
             { _id: new ObjectId(petId) },
             { $set: { energy: newEnergy } },
             { returnDocument: 'after' } // Return the updated document

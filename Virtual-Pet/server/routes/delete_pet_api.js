@@ -13,7 +13,7 @@ router.delete('/:petId', async (req, res) => {
 
     try {
         // Attempt to delete the pet from the "pets" collection
-        const result = await db.collection('pets').deleteOne({ _id: petId });
+        const result = await db.collection('all').deleteOne({ _id: petId });
 
         // Check if a pet was deleted
         if (result.deletedCount === 0) {

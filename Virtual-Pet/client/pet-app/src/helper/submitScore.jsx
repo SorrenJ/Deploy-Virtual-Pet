@@ -3,7 +3,7 @@ const submitScore = async (userId, score) => {
   const moneyEarned = score * moneyPerScore;
 
   try {
-    const response = await fetch('http://localhost:5000/api/convert-score', {
+    const response = await fetch('/api/convert-score', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ userId, score }),

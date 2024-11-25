@@ -14,9 +14,9 @@ router.post('/', async (req, res) => {
     console.log(`Feeding pet. User ID: ${userId}, Pet ID: ${petId}, Food ID: ${foodId}`); // Log details
 
     try {
-        const petsCollection = db.collection('pets');
-        const foodsCollection = db.collection('foods');
-        const userFoodsCollection = db.collection('user_foods');
+        const petsCollection = db.collection('all');
+        const foodsCollection = db.collection('all');
+        const userFoodsCollection = db.collection('all');
 
         // Initialize hunger to 100 if it's currently null
         const pet = await petsCollection.findOneAndUpdate(

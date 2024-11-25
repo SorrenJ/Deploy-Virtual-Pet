@@ -15,7 +15,7 @@ const CleanPetPage= () => {
     // Fetch data for pets and user toiletry
     const fetchData = async () => {
         try {
-            const response = await fetch(`https://virtual-pet-backend-3nat.onrender.com/api/home?selectedPetId=${selectedPet?selectedPet.pet_id:1}`);
+            const response = await fetch(`api/home?selectedPetId=${selectedPet?selectedPet.pet_id:1}`);
             const data = await response.json();
 
             setPets(data.pets || []);
