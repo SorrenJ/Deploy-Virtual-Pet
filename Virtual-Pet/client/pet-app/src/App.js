@@ -13,7 +13,7 @@ import NavBar from './routes/navBar';
 import './App.css';
 import PetPage from './routes/petPage';
 import FrontPage from './routes/frontPage';
-
+import DebugPage from "./routes/debugPage";
 
 function App() {
   const location = useLocation(); // Get the current location
@@ -40,7 +40,7 @@ function App() {
           <Route path="/homeTester2" element={<HomeTesterPage2 />} />
           <Route path="/sprites" element={<PetPage />} />
           <Route path="/mood" element={<MoodTesterPage />} />
-         
+          <Route path="/debug" element={<DebugPage />} />
         </Routes>
       </main>
     </div>
