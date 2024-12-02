@@ -222,7 +222,7 @@ if (!colorId) {
             return;
         }
         try {
-             const spriteResponse = await fetch(`http://localhost:5000/api/pets-stats/pet-sprite/${petId}?mood_id=${moodId}&color_id=${colorId}`);
+             const spriteResponse = await fetch(`https://virtual-pet-backend-3nat.onrender.com/api/pets-stats/pet-sprite/${petId}?mood_id=${moodId}&color_id=${colorId}`);
             const spriteData = await spriteResponse.json();
             const spriteWithCacheBuster = `${spriteData.image_url}?v=${new Date().getTime()}`;
 
@@ -243,7 +243,7 @@ if (!colorId) {
   // Update pet mood on the server
   const updatePetMood = async (petId, newMoodId) => {
     try {
-        const response = await fetch(`http://localhost:5000/api/pets-stats/update-mood/${petId}`, {
+        const response = await fetch(`https://virtual-pet-backend-3nat.onrender.com/api/pets-stats/update-mood/${petId}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -278,7 +278,7 @@ if (!colorId) {
 
 
         try {
-            const response = await fetch(`http://localhost:5000/api/pets-stats/reduce-hunger/${selectedPet.pet_id}`, {
+            const response = await fetch(`https://virtual-pet-backend-3nat.onrender.com/api/pets-stats/reduce-hunger/${selectedPet.pet_id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -306,7 +306,7 @@ if (!colorId) {
 
 
         try {
-            const response = await fetch(`http://localhost:5000/api/pets-stats/reduce-energy/${selectedPet.pet_id}`, {
+            const response = await fetch(`https://virtual-pet-backend-3nat.onrender.com/api/pets-stats/reduce-energy/${selectedPet.pet_id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -338,7 +338,7 @@ if (!colorId) {
 
 
             try {
-                const response = await fetch(`http://localhost:5000/api/pets-stats/reduce-happiness/${selectedPet.pet_id}`, {
+                const response = await fetch(`https://virtual-pet-backend-3nat.onrender.com/api/pets-stats/reduce-happiness/${selectedPet.pet_id}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
@@ -364,7 +364,7 @@ if (!colorId) {
 
 
                     try {
-                        const response = await fetch(`http://localhost:5000/api/pets-stats/reduce-cleanliness/${selectedPet.pet_id}`, {
+                        const response = await fetch(`https://virtual-pet-backend-3nat.onrender.com/api/pets-stats/reduce-cleanliness/${selectedPet.pet_id}`, {
                             method: 'PATCH',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -400,7 +400,7 @@ const sleepButton = async (amount, petId) => {
 
     try {
         // Step 1: Increase the energy stat by the specified amount
-        const response = await fetch(`http://localhost:5000/api/sleep-pet/${petId}`, {
+        const response = await fetch(`https://virtual-pet-backend-3nat.onrender.com/api/sleep-pet/${petId}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -459,7 +459,7 @@ const feedPet = async (petId, foodId) => {
         if (!petId || !foodId) throw new Error('Missing petId or foodId');
 
 
-        const response = await fetch('http://localhost:5000/api/feed-pet', {
+        const response = await fetch('https://virtual-pet-backend-3nat.onrender.com/api/feed-pet', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -519,7 +519,7 @@ const feedPet = async (petId, foodId) => {
             if (!petId || !toiletriesId) throw new Error('Missing petId or toiletriesId');
 
 
-            const response = await fetch('http://localhost:5000/api/clean-pet', {
+            const response = await fetch('https://virtual-pet-backend-3nat.onrender.com/api/clean-pet', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -577,7 +577,7 @@ const feedPet = async (petId, foodId) => {
             if (!petId || !toyId) throw new Error('Missing petId or toyId');
 
 
-            const response = await fetch('http://localhost:5000/api/play-with-pet', {
+            const response = await fetch('https://virtual-pet-backend-3nat.onrender.com/api/play-with-pet', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -641,7 +641,7 @@ const deletePet = async (petId) => {
 
 
     try {
-        const response = await fetch(`http://localhost:5000/api/delete-pet/${petId}`, {
+        const response = await fetch(`https://virtual-pet-backend-3nat.onrender.com/api/delete-pet/${petId}`, {
             method: 'DELETE',
         });
 
@@ -749,7 +749,7 @@ const adjustHappiness = async (amount) => {
 
 
     try {
-        const response = await fetch(`http://localhost:5000/api/pets-stats/reduce-happiness/${selectedPet.pet_id}`, {
+        const response = await fetch(`https://virtual-pet-backend-3nat.onrender.com/api/pets-stats/reduce-happiness/${selectedPet.pet_id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
