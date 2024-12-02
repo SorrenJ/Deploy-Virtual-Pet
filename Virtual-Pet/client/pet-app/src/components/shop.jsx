@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/shop.scss';
 
-const Shop = ({ money, toys, toiletries, foods, onBuy, onAddMoney }) => {
+const Shop = ({ money = 0, toys = [], toiletries = [], foods = [], onBuy, onAddMoney }) => {
   // State to track shopkeeper's mood
   const [shopkeeperMood, setShopkeeperMood] = useState({
     image: "https://res.cloudinary.com/deszclhtq/image/upload/v1728147784/Shopkeeper_Neutral_grmlj6.png",
@@ -90,7 +90,8 @@ const Shop = ({ money, toys, toiletries, foods, onBuy, onAddMoney }) => {
         <div className='toys-container category-container'>
           <h1 className='text-3xl font-bold'>Toys</h1>
           <div className='items-row'>
-            {toys.slice(0, 3).map((toy) => (
+          {toys?.length ? (
+            toys.slice(0, 3).map((toy) => (
               <div key={toy.id} className='toys tooltip'>
                 <h2>{toy.name}</h2>
                 <div className="tooltiptext">
@@ -107,10 +108,14 @@ const Shop = ({ money, toys, toiletries, foods, onBuy, onAddMoney }) => {
                 />
                 <button onClick={() => handleBuy(toy.id, 'toys', toy.price)}>Buy</button>
               </div>
-            ))}
+            ))
+          ) : (
+            <p>Loading toys...</p>
+          )}
           </div>
           <div className='items-row'>
-            {toys.slice(3).map((toy) => (
+            {toys?.length ? (
+            toys.slice(0, 3).map((toy) => (
               <div key={toy.id} className='toys tooltip'>
                 <h2>{toy.name}</h2>
                 <div className="tooltiptext">
@@ -127,7 +132,10 @@ const Shop = ({ money, toys, toiletries, foods, onBuy, onAddMoney }) => {
                 />
                 <button onClick={() => handleBuy(toy.id, 'toys', toy.price)}>Buy</button>
               </div>
-            ))}
+                ))
+              ) : (
+                <p>Loading toys...</p>
+              )}
           </div>
         </div>
 
@@ -135,7 +143,7 @@ const Shop = ({ money, toys, toiletries, foods, onBuy, onAddMoney }) => {
         <div className='toiletries-container category-container'>
           <h1 className='text-3xl font-bold'>Toiletries</h1>
           <div className='items-row'>
-            {toiletries.slice(0, 3).map((toiletry) => (
+            {toiletries?.length ? (toiletries.slice(0, 3).map((toiletry) => (
               <div key={toiletry.id} className='toiletries tooltip'>
                 <h2>{toiletry.name}</h2>
                 <div className="tooltiptext">
@@ -152,10 +160,13 @@ const Shop = ({ money, toys, toiletries, foods, onBuy, onAddMoney }) => {
                 />
                 <button onClick={() => handleBuy(toiletry.id, 'toiletries', toiletry.price)}>Buy</button>
               </div>
-            ))}
+                 ))
+                ) : (
+                  <p>Loading toiletries...</p>
+                )}
           </div>
           <div className='items-row'>
-            {toiletries.slice(3).map((toiletry) => (
+            {toiletries?.length ? (toiletries.slice(0, 3).map((toiletry) =>  (
               <div key={toiletry.id} className='toiletries tooltip'>
                 <h2>{toiletry.name}</h2>
                 <div className="tooltiptext">
@@ -172,7 +183,10 @@ const Shop = ({ money, toys, toiletries, foods, onBuy, onAddMoney }) => {
                 />
                 <button onClick={() => handleBuy(toiletry.id, 'toiletries', toiletry.price)}>Buy</button>
               </div>
-            ))}
+                ))
+              ) : (
+                <p>Loading toiletries...</p>
+              )}
           </div>
         </div>
 
@@ -200,7 +214,7 @@ const Shop = ({ money, toys, toiletries, foods, onBuy, onAddMoney }) => {
             ))}
           </div>
           <div className='items-row'>
-            {foods.slice(3).map((food) => (
+            {foods?.length ? (foods.slice(3).map((food) => (
               <div key={food.id} className='foods tooltip'>
                 <h2>{food.name}</h2>
                 <div className="tooltiptext">
@@ -217,7 +231,10 @@ const Shop = ({ money, toys, toiletries, foods, onBuy, onAddMoney }) => {
                 />
                 <button onClick={() => handleBuy(food.id, 'foods', food.price)}>Buy</button>
               </div>
-            ))}
+             ))
+            ) : (
+              <p>Loading foods...</p>
+            )}
           </div>
         </div>
       </div>
