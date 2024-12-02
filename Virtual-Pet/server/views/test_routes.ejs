@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Tester</title>
+  <script>
+    // Function to send GET requests
+    async function testGet(url) {
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        displayResponse(url, data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        displayResponse(url, { error: error.message });
+      }
+    }
+
+    // Function to send POST requests
+    async function testPost(url, body) {
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+        const data = await response.json();
+        displayResponse(url, data);
+      } catch (error) {
+        console.error("Error posting data:", error);
+        displayResponse(url, { error: error.message });
+      }
+    }
+
+    // Function to display responses
+    function displayResponse(url, response) {
+      const results = document.getElementById("results");
+      const responseBlock = document.createElement("pre");
+      responseBlock.innerHTML = `<strong>${url}</strong>\n${JSON.stringify(response, null, 2)}`;
+      results.appendChild(responseBlock);
+    }
+  </script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f9;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .api-section {
+      margin-bottom: 30px;
+    }
+
+    .api-section button {
+      margin-right: 10px;
+    }
+
+    #results {
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-top: 20px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    pre {
+      background: #f7f7f9;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>API Tester</h1>
+
+  <div class="api-section">
+    <h3>Test GET Routes</h3>
+    <button onclick="testGet('/api/all')">GET /api/all</button>
+    <button onclick="testGet('/api/pets')">GET /api/pets</button>
+    <button onclick="testGet('/api/home')">GET /api/home</button>
+    <button onclick="testGet('/api/species')">GET /api/species</button>
+    <button onclick="testGet('/api/user-pets')">GET /api/user-pets</button>
+  </div>
+
+  <div class="api-section">
+    <h3>Test POST Routes</h3>
+    <button onclick="testPost('/api/adopt-pet', { species_id: 1, color_id: 1 })">
+      POST /api/adopt-pet
+    </button>
+    <button onclick="testPost('/api/add-money', { userId: 1, amount: 100 })">
+      POST /api/add-money
+    </button>
+    <button onclick="testPost('/api/set-pet-name', { pet_id: 1, name: 'Fluffy' })">
+      POST /api/set-pet-name
+    </button>
+    <button onclick="testPost('/buy', { userId: 1, itemId: 1, itemType: 'toys', itemCount: 2 })">
+      POST /buy
+    </button>
+  </div>
+
+  <div id="results">
+    <h3>Results:</h3>
+  </div>
+</body>
+</html>
