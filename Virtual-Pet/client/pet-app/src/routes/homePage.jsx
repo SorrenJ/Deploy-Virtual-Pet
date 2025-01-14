@@ -12,6 +12,7 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'; // Import the 
 import '../styles/home.scss';  // Assuming the CSS is in the same directory as your JSX file
 import '../styles/progressBars.scss';  // Assuming the CSS is in the same directory as your JSX file
 import '../styles/background.scss';
+import '../styles/threeRowFlex.scss';
 const sentimentAnalyzer = new Sentiment();
 
 
@@ -933,9 +934,9 @@ const adjustHappiness = async (amount) => {
                 ))}
               </select>
 
-              <div className="pet-details-container">
+              <div className="pet-details-container flex-container">
                 {/* Left Section */}
-                <div className="left-section">
+                <div className="left-section flex-item ">
                   <h2>Inventory</h2>
                   <div className="inventory-section">
                     <button onClick={() => setVisibleComponent(1)} disabled={visibleComponent === 1}>Pet Treats</button>
@@ -950,7 +951,7 @@ const adjustHappiness = async (amount) => {
    
 
                 {/* Mid Section */}
-                <div className="mid-section">
+                <div className="mid-section flex-item ">
                   <div className="bot-message">
                     {messages.length > 0 && messages[messages.length - 1].bot ? messages[messages.length - 1].bot : "No response yet."}
                   </div>
@@ -1000,7 +1001,7 @@ const adjustHappiness = async (amount) => {
                 </div>
 
                 {/* Right Section */}
-                <div className="right-section">
+                <div className="right-section flex-item ">
                   {selectedPet && petStats ? (
                     <>
                       <h2>Meet {selectedPet.pet_name}</h2>

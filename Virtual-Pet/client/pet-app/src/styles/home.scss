@@ -71,6 +71,16 @@ body {
     transform: perspective(500px) rotateX(360deg) rotateY(18deg) skew(356deg, 0deg);
 }
 
+
+@media (max-width: 1080px) {
+  .left-section {
+    transform: perspective(0px) rotateX(0deg) rotateY(0deg) skew(0deg, 0deg);
+  }
+  .left-section:hover {
+    transform: perspective(0px) rotateX(0deg) rotateY(0deg) skew(0deg, 0deg);
+}
+
+}
 /* Inventory Section */
 .inventory-header {
   font-size: 1.8em;
@@ -219,6 +229,17 @@ button{
 
 .right-section:hover {
     transform: perspective(500px) rotateX(9deg) rotateY(330deg) skew(2deg, 0deg); /* Slight tilt to the right on hover */
+  }
+
+
+  @media (max-width: 1080px) {
+    .right-section {
+      transform: perspective(0px) rotateX(0deg) rotateY(0deg) skew(0deg, 0deg);
+    }
+    .right-section:hover {
+      transform: perspective(0px) rotateX(0deg) rotateY(0deg) skew(0deg, 0deg);
+  }
+  
   }
 
 .inventory-section {

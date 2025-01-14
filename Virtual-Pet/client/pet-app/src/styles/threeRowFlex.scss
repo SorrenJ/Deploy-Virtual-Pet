@@ -1,0 +1,47 @@
+.flex-container {
+    display: flex;
+    flex-direction: row; /* Default: Horizontal layout */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    // background-color: #f4f4f4;
+    padding: 10px;
+  }
+  
+  .flex-item {
+    // background-color: #007bff;
+    // color: white;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  /* Responsive Layout for Smaller Screens */
+  @media (max-width: 1080px) {
+    .flex-container {
+      flex-direction: column; /* Change to vertical layout on smaller screens */
+      justify-content: flex-start;
+      align-items: stretch; /* Items take full width */
+      height: auto;
+    }
+  
+    .flex-item {
+      width: 100%; /* Items take full width */
+      box-sizing: border-box;
+    }
+
+    /* reorder the fkex-item when it meets media query */
+
+    .flex-item:nth-child(1) {
+        order: 3;
+      }
+      .flex-item:nth-child(2) {
+        order: 1;
+      }
+      .flex-item:nth-child(3) {
+        order: 2;
+      }
+
+  }
+  
